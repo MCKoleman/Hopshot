@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     {
         // Start game
         // Init everything
+        UIManager.Instance.InitSingleton();
         this.InitSingleton();
         StartGame();
     }

@@ -40,14 +40,14 @@ public class PlayerController : MonoBehaviour
     //
     private void HandlePause()
     {
-
+        UIManager.Instance.TogglePause();
     }
     #endregion
 
     #region Input Context Handlers
     public void HandleMoveContext(InputAction.CallbackContext context)
     {
-        if (!CanTakeInput())
+        if (!CanTakeInput() && context.ReadValue<Vector2>() != Vector2.zero)
             return;
 
         HandleMove(context.ReadValue<Vector2>());
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     #region Helper Functions
     private bool CanTakeInput()
     {
-        return GameManager.Instance.IsGameActive && !GameManager.Instance.IsGamePaused();
+        return GameManager.Instance.IsGameActive && !UIManager.Instance.IsPaused;
     }
     #endregion
 }
