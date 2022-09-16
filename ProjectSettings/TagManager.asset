@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -44,8 +46,14 @@ TagManager:
   - name: Background
     uniqueID: 1130433351
     locked: 0
+  - name: Ground
+    uniqueID: 72631063
+    locked: 0
   - name: Character
     uniqueID: 3805114471
+    locked: 0
+  - name: Obstacles
+    uniqueID: 2097871443
     locked: 0
   - name: VFX
     uniqueID: 1436062205

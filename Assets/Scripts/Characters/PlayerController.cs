@@ -9,9 +9,19 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 5.0f;
     [SerializeField]
     private float moveLerpSpeed = 6.0f;
+
+    [Header("Jump")]
     [SerializeField]
-    private Vector2 moveDelta;
+    private float jumpForce = 5.0f;
+    [SerializeField]
+    private float massNormal = 1.0f;
+    [SerializeField]
+    private float massHeavy = 3.0f;
+
+    private float moveDeltaX;
     private Rigidbody2D rb;
+
+    private const float JUMP_THRESHOLD = 0.3f;
 
     private void Start()
     {
@@ -20,7 +30,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + Time.fixedDeltaTime * moveSpeed * moveDelta);
+        SetIsHeavy(rb.velocity.y < 0.0f);
+        
+        rb.AddForce(moveSpeed * moveDeltaX * Vector2.right);
+        //rb.MovePosition(rb.position + Time.fixedDeltaTime * moveSpeed * moveDelta);
         //rb.MovePosition(Vector2.Lerp(rb.position, targetPos, moveLerpSpeed * Time.deltaTime));
     }
 
@@ -28,7 +41,16 @@ public class PlayerController : MonoBehaviour
     // Sets the target movement of the player
     public void HandleMove(Vector2 delta)
     {
-        moveDelta = delta.normalized;
+        moveDeltaX = delta.x;
+        if (delta.y > JUMP_THRESHOLD)
+            HandleJump();
+    }
+
+    // Handles jumping
+    public void HandleJump()
+    {
+        SetIsHeavy(false);
+        rb.AddForce(jumpForce * Vector2.up);
     }
 
     //
@@ -44,6 +66,22 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Helper Functions
+    private bool CanTakeInput()
+    {
+        return GameManager.Instance.IsGameActive && !UIManager.Instance.IsPaused;
+    }
+
+    // Sets the players mass as either heavy or normal
+    private void SetIsHeavy(bool isHeavy)
+    {
+        if (isHeavy)
+            rb.mass = massHeavy;
+        else
+            rb.mass = massNormal;
+    }
+    #endregion
+
     #region Input Context Handlers
     public void HandleMoveContext(InputAction.CallbackContext context)
     {
@@ -51,6 +89,14 @@ public class PlayerController : MonoBehaviour
             return;
 
         HandleMove(context.ReadValue<Vector2>());
+    }
+
+    public void HandleJumpContext(InputAction.CallbackContext context)
+    {
+        if (!CanTakeInput())
+            return;
+
+        HandleJump();
     }
 
     public void HandleAttackContext(InputAction.CallbackContext context)
@@ -69,13 +115,6 @@ public class PlayerController : MonoBehaviour
 
         if (context.performed)
             HandlePause();
-    }
-    #endregion
-
-    #region Helper Functions
-    private bool CanTakeInput()
-    {
-        return GameManager.Instance.IsGameActive && !UIManager.Instance.IsPaused;
     }
     #endregion
 }
