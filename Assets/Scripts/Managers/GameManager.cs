@@ -2,17 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool IsGameActive { get; private set; }
+
+    private void Start()
     {
-        
+        // Start game
+        // Init everything
+        this.InitSingleton();
+        StartGame();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InitSingleton()
     {
-        
+        // 
     }
+
+    public void StartGame()
+    {
+        IsGameActive = true;
+    }
+
+    public void EndGame()
+    {
+        IsGameActive = false;
+    }
+
+    public bool IsGamePaused() { return Time.timeScale == 0.0f; }
 }
