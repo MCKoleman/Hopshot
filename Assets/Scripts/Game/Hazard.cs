@@ -13,9 +13,7 @@ public class Hazard : MonoBehaviour
         {
             Character tempChar = collision.collider.GetComponent<Character>();
             if(tempChar != null)
-            {
-                tempChar.TakeDamage(damage);
-            }
+                tempChar.TakeDamage(new DamageInfo(damage, DamageType.HAZARD, null));
         }
     }
 }

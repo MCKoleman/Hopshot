@@ -251,9 +251,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   moveLerpSpeed: 6
-  jumpForce: 5
+  jumpForce: 120
   massNormal: 1
-  massHeavy: 3
+  massHeavy: 1
 --- !u!114 &4701958621740524663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f199fabb9eca9c944ada84f6373d0204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1
+  respawnTime: 5
 --- !u!50 &8646311187271778165
 Rigidbody2D:
   serializedVersion: 4
@@ -301,5 +303,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1.5}
+  m_Size: {x: 1, y: 1}
   m_Direction: 0

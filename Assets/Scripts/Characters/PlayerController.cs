@@ -30,9 +30,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SetIsHeavy(rb.velocity.y < 0.0f);
+        //SetIsHeavy(rb.velocity.y < 0.0f);
         
-        rb.AddForce(moveSpeed * moveDeltaX * Vector2.right);
+        if(moveDeltaX != 0.0f)
+            rb.AddForce(moveSpeed * moveDeltaX * Vector2.right);
         //rb.MovePosition(rb.position + Time.fixedDeltaTime * moveSpeed * moveDelta);
         //rb.MovePosition(Vector2.Lerp(rb.position, targetPos, moveLerpSpeed * Time.deltaTime));
     }
@@ -42,14 +43,12 @@ public class PlayerController : MonoBehaviour
     public void HandleMove(Vector2 delta)
     {
         moveDeltaX = delta.x;
-        if (delta.y > JUMP_THRESHOLD)
-            HandleJump();
     }
 
     // Handles jumping
     public void HandleJump()
     {
-        SetIsHeavy(false);
+        //SetIsHeavy(false);
         rb.AddForce(jumpForce * Vector2.up);
     }
 
@@ -75,6 +74,9 @@ public class PlayerController : MonoBehaviour
     // Sets the players mass as either heavy or normal
     private void SetIsHeavy(bool isHeavy)
     {
+        if ((rb.mass == massHeavy && isHeavy) || (rb.mass == massNormal && !isHeavy))
+            return;
+
         if (isHeavy)
             rb.mass = massHeavy;
         else
@@ -87,6 +89,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!CanTakeInput() && context.ReadValue<Vector2>() != Vector2.zero)
             return;
+
+        if (context.performed && context.ReadValue<Vector2>().y > JUMP_THRESHOLD)
+            HandleJump();
 
         HandleMove(context.ReadValue<Vector2>());
     }
