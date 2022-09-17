@@ -60,7 +60,9 @@ public class Character : MonoBehaviour
         _isDead = false;
         OnDeath?.Invoke();
         if(!DoesRespawn)
+        {
             Destroy(this.gameObject);
+        }
         else
             respawnCoroutine = StartCoroutine(HandleRespawnTimer());
     }

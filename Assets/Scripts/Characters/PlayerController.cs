@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private float massHeavy = 3.0f;
 
     private float moveDeltaX;
+    private int jumpCount;
     private Rigidbody2D rb;
 
     private const float JUMP_THRESHOLD = 0.3f;
@@ -93,7 +94,12 @@ public class PlayerController : MonoBehaviour
             return;
 
         if (context.performed && context.ReadValue<Vector2>().y > JUMP_THRESHOLD)
+        {
             HandleJump();
+            jumpCount = 0;
+        }
+        if (context.canceled && context.ReadValue<Vector2>().y > JUMP_THRESHOLD)
+            jumpCount = 1;
 
         HandleMove(context.ReadValue<Vector2>());
     }
