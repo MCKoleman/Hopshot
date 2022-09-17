@@ -49,6 +49,7 @@ public class Character : MonoBehaviour
     {
         _isDead = false;
         rb.position = spawnPos;
+        rb.velocity = Vector2.zero;
         EnableCharacter();
         ResetHealthToMax();
         OnSpawn?.Invoke();
