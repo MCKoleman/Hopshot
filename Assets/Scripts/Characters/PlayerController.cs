@@ -85,6 +85,9 @@ public class PlayerController : MonoBehaviour
         else
             rb.mass = massNormal;
     }
+
+    // Returns the player's position
+    public Vector2 GetPos() { return rb.position; }
     #endregion
 
     #region Input Context Handlers

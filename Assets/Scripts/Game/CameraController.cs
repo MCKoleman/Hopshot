@@ -8,11 +8,15 @@ public class CameraController : MonoBehaviour
     private float followSpeed;
     [SerializeField]
     private bool shouldFollow = false;
+    [SerializeField]
+    private float latestX = float.MinValue;
     private PlayerController player;
+    private float initialY;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
+        initialY = this.transform.position.y;
     }
 
     private void Update()
@@ -20,13 +24,15 @@ public class CameraController : MonoBehaviour
         if (!shouldFollow)
             return;
 
-        this.transform.position = Vector3.Lerp(this.transform.position, GetPlayerPos(), followSpeed * Time.deltaTime);
+        this.transform.position = Vector3.Lerp(this.transform.position, GetTargetPos(), followSpeed * Time.deltaTime);
+        latestX = this.transform.position.x;
     }
 
-    private Vector3 GetPlayerPos()
+    // Returns a valid target position to move to
+    private Vector3 GetTargetPos()
     {
         if(player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
-        return new Vector3(player.transform.position.x, player.transform.position.y, this.transform.position.z);
+        return new Vector3(Mathf.Max(player.GetPos().x, latestX), initialY, this.transform.position.z);
     }
 }
