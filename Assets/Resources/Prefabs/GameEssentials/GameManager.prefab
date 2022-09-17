@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  DEBUG_DISABLE_GENERATION: 1
 --- !u!1 &3948745073147285447
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   projectileHolder: {fileID: 422100038659497147}
   levelHolder: {fileID: 4573418849462114805}
-  enemyHolder: {fileID: 4548538040760613724}
+  contentHolder: {fileID: 0}
 --- !u!1 &4559384254263668761
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,4 +232,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
   roomList: {fileID: 11400000, guid: d38f94e3247986649878bbef7985e765, type: 2}
+  contentList: {fileID: 11400000, guid: 433e6d7ff2ec807439f7ed80cc6bbe25, type: 2}
+  diffMods: {fileID: 11400000, guid: 76bdcfc985cacc44e997b0ad533096fc, type: 2}
   hardRoomInterval: 4
+  prevRoom: {fileID: 0}
+  curRoom: {fileID: 0}
+  nextRoom: {fileID: 0}

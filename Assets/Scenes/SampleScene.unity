@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4936987067723899628, guid: a115d25cd1b4b4f4396f9ee0bdfcebe4, type: 3}
       propertyPath: followSpeed
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4936987067723899628, guid: a115d25cd1b4b4f4396f9ee0bdfcebe4, type: 3}
       propertyPath: shouldFollow

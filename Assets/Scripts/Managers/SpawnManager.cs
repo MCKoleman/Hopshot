@@ -9,6 +9,8 @@ public class SpawnManager : Singleton<SpawnManager>
     private RoomList roomList;
     [SerializeField]
     private ContentList contentList;
+    [SerializeField]
+    private DifficultyMods diffMods;
     [SerializeField, Range(1, 5)]
     private int hardRoomInterval = 4;
 
