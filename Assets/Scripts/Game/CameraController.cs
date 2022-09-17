@@ -8,11 +8,18 @@ public class CameraController : MonoBehaviour
     private float followSpeed;
     [SerializeField]
     private bool shouldFollow = false;
+    [SerializeField]
+    private float minScreenPos = 0.70f;
+    [SerializeField]
+    private float latestX = float.MinValue;
+
     private PlayerController player;
+    private float initialY;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
+        initialY = this.transform.position.y;
     }
 
     private void Update()
@@ -20,13 +27,27 @@ public class CameraController : MonoBehaviour
         if (!shouldFollow)
             return;
 
-        this.transform.position = Vector3.Lerp(this.transform.position, GetPlayerPos(), followSpeed * Time.deltaTime);
+        latestX = Mathf.Lerp(this.transform.position.x, Mathf.Max(GetTargetX(), latestX), followSpeed * Time.deltaTime);
+        this.transform.position = new Vector3(latestX, initialY, this.transform.position.z);
     }
 
-    private Vector3 GetPlayerPos()
+    // Returns a valid target position to move to
+    private float GetTargetX()
     {
         if(player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
-        return new Vector3(player.transform.position.x, player.transform.position.y, this.transform.position.z);
+
+        // If the target hasn't reached the move threshold, keep the camera still
+        if (GetTargetPosPercent() <= minScreenPos)
+            return this.transform.position.x;
+
+        // If the target has reached the move threshold, use the player's position
+        return player.GetPos().x;
+    }
+
+    // Returns the targets position as a percentage of its position on screen
+    private float GetTargetPosPercent()
+    {
+        return Camera.main.WorldToViewportPoint(player.GetPos()).x;
     }
 }

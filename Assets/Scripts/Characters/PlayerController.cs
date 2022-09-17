@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         //SetIsHeavy(rb.velocity.y < 0.0f);
         
@@ -85,6 +85,9 @@ public class PlayerController : MonoBehaviour
         else
             rb.mass = massNormal;
     }
+
+    // Returns the player's position
+    public Vector2 GetPos() { return rb.position; }
     #endregion
 
     #region Input Context Handlers
