@@ -33,7 +33,7 @@ public class Gate_Button : MonoBehaviour
         if(!active)
             return;
         
-        if (!collider.CompareTag("Player") || collider.CompareTag("Friend"))
+        if (!collider.CompareTag("Player") && !collider.CompareTag("Friend"))
             return;
         OnButtonPress?.Invoke();
         touching++;
