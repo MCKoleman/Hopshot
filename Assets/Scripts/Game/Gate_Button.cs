@@ -16,14 +16,13 @@ public class Gate_Button : MonoBehaviour
     [SerializeField]
     private Sprite[] pics;
 
-    [SerializeField]
-    public SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
         active = true;
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
 
     }
 
