@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f59505000863347b0eb3261ca16059, type: 3}
   m_Name: DifficultyMods
   m_EditorClassIdentifier: 
-  cameraSpeedUpMod: 0.1
+  cameraSpeedUpMod: 0.5

@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private bool shouldFollow = false;
     [SerializeField]
+    private float moveSpeed = 0.1f;
+    [SerializeField]
     private float minScreenPos = 0.70f;
     [SerializeField]
     private float latestX = float.MinValue;
@@ -27,7 +29,7 @@ public class CameraController : MonoBehaviour
         if (!shouldFollow)
             return;
 
-        latestX = Mathf.Lerp(this.transform.position.x, Mathf.Max(GetTargetX(), latestX), followSpeed * Time.deltaTime);
+        latestX = Mathf.Lerp(this.transform.position.x, Mathf.Max(GetTargetX(), latestX + GetMoveDisplacement()), followSpeed * Time.deltaTime);
         this.transform.position = new Vector3(latestX, initialY, this.transform.position.z);
     }
 
@@ -49,5 +51,11 @@ public class CameraController : MonoBehaviour
     private float GetTargetPosPercent()
     {
         return Camera.main.WorldToViewportPoint(player.GetPos()).x;
+    }
+    
+    // Moves the camera slowly to the right
+    private float GetMoveDisplacement()
+    {
+        return moveSpeed * Time.deltaTime * SpawnManager.Instance.GetCameraMoveMod();
     }
 }

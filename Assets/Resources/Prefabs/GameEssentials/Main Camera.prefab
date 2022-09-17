@@ -162,6 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 0
   shouldFollow: 0
+  moveSpeed: 0.3
+  minScreenPos: 0.7
   latestX: -3.4028235e+38
 --- !u!81 &2484703488732807162
 AudioListener:

@@ -99,4 +99,11 @@ public class SpawnManager : Singleton<SpawnManager>
         Instantiate(content, targetPos, Quaternion.identity, PrefabManager.Instance.contentHolder);
     }
     #endregion
+
+    #region Difficulty
+    public float GetCameraMoveMod()
+    {
+        return 1.0f + diffMods.cameraSpeedUpMod * CurRoomIndex;
+    }
+    #endregion
 }
