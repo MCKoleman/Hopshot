@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public void HandleMove(Vector2 delta)
     {
         moveDeltaX = delta.x;
+        //Debug.Log("I'm Jumping");
     }
 
     // Handles jumping
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         //SetIsHeavy(false);
         rb.AddForce(jumpForce * Vector2.up);
+        //Debug.Log("I'm Jumping");
     }
 
     //
