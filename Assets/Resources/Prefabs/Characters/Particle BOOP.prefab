@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 326195606815070384}
   - component: {fileID: 574557157683127474}
   - component: {fileID: 6466970147884078635}
+  - component: {fileID: 7644468472266814619}
   m_Layer: 0
   m_Name: Particle BOOP
   m_TagString: Untagged
@@ -105,7 +106,7 @@ TrailRenderer:
       serializedVersion: 2
       key0: {r: 0, g: 0.28146982, b: 1, a: 1}
       key1: {r: 0, g: 0.84560055, b: 0.8745098, a: 1}
-      key2: {r: 0, g: 1, b: 0.5909593, a: 0.39215687}
+      key2: {r: 0, g: 1, b: 0.5909593, a: 0.27450982}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -190,3 +191,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &7644468472266814619
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031813602265659510}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
