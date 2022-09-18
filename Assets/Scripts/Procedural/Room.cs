@@ -55,4 +55,5 @@ public class Room : MonoBehaviour
 
     // Returns the next rooms position
     public Vector3 GetNextRoomPos() { return nextRoomNode.transform.position; }
+    public RoomType GetRoomType() { return roomType; }
 }
