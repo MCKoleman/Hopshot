@@ -27,6 +27,6 @@ public class PrefabManager : Singleton<PrefabManager>
             return;
 
         for (int i = trans.childCount - 1; i >= 0; i--)
-            Destroy(trans.GetChild(i));
+            Destroy(trans.GetChild(i).gameObject);
     }
 }

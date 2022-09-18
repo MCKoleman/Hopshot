@@ -35,6 +35,11 @@ public class UIManager : Singleton<UIManager>
         mainMenu.SetActive(true);
     }
 
+    public void ReturnToMainMenu()
+    {
+        GameManager.Instance.EndGame();
+    }
+
     #region Pausing
     // Toggles the paused state of the game
     public void TogglePause()

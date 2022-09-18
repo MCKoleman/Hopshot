@@ -33,6 +33,7 @@ public class GameManager : Singleton<GameManager>
     public void InitSingleton()
     {
         // Init everything
+        LootLockerManager.Instance.InitSingleton();
         PrefabManager.Instance.InitSingleton();
         UIManager.Instance.InitSingleton();
         ScoreManager.Instance.InitSingleton();
@@ -43,6 +44,8 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         IsGameActive = true;
+        ScoreManager.Instance.InitHighscore();
+
 #if UNITY_EDITOR
         if(!DEBUG_DISABLE_GENERATION)
 #endif
@@ -53,6 +56,7 @@ public class GameManager : Singleton<GameManager>
     public void EndGame()
     {
         IsGameActive = false;
+        ScoreManager.Instance.SubmitScore();
         PrefabManager.Instance.ClearContent();
     }
 
