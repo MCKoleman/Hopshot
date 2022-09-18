@@ -5,10 +5,64 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private bool isFadeOutComplete = false;
+    private bool isFadeInComplete = false;
+
+    #region Scene Transition Listeners
+    private void OnEnable()
+    {
+        UISceneTransition.OnFadeInComplete += HandleFadeInComplete;
+        UISceneTransition.OnFadeOutComplete += HandleFadeOutComplete;
+    }
+
+    private void OnDisable()
+    {
+        UISceneTransition.OnFadeInComplete -= HandleFadeInComplete;
+        UISceneTransition.OnFadeOutComplete -= HandleFadeOutComplete;
+    }
+
+    private void HandleFadeOutComplete() { isFadeOutComplete = true; }
+    private void HandleFadeInComplete() { isFadeInComplete = true; }
+    #endregion
+
+    // Loads the scene with the given ID instantly
     public void LoadSceneWithId(int level)
     {    
-        Time.timeScale = 1;
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(level);
+    }
+
+    // Asynchronously loads the scene, using scene transitions along the way
+    public void LoadSceneAsync(int level)
+    {
+        Time.timeScale = 1.0f;
+        StartCoroutine(HandleAsyncSceneLoad(level));
+    }
+
+    // Handles loading a scene in the background
+    private IEnumerator HandleAsyncSceneLoad(int level)
+    {
+        isFadeInComplete = false;
+        isFadeOutComplete = false;
+
+        // Fades out the screen
+        UIManager.Instance.SceneFadeOut();
+        yield return new WaitUntil(() => isFadeOutComplete);
+
+        // Loads scene in background
+        if(level == 0)
+            UIManager.Instance.EnableMainMenu();
+        else
+            UIManager.Instance.EnableHUD();
+        AsyncOperation loading = SceneManager.LoadSceneAsync(level);
+        yield return new WaitUntil(() => loading.isDone);
+
+        // Fades in the screen
+        UIManager.Instance.SceneFadeIn();
+        yield return new WaitUntil(() => isFadeInComplete);
+
+        // Activates the game
+        GameManager.Instance.HandleSceneLoad();
     }
 
     public void Quit()

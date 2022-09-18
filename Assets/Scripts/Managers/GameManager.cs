@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool IsGameActive { get; private set; }
     public bool IsMobile { get; private set; }
+    public bool IsSceneLoaded { get; private set; }
 
     public delegate void MobileStatusChanged(bool isMobile);
     public event MobileStatusChanged OnMobileStatusChange;
@@ -17,6 +18,8 @@ public class GameManager : Singleton<GameManager>
     public static event GameStart OnGameStart;
     public delegate void GameEnd();
     public static event GameEnd OnGameEnd;
+    public delegate void SceneLoad();
+    public static event SceneLoad OnSceneLoad;
 
     #region Events
     private void OnEnable() { SceneDetector.OnSceneStart += HandleSceneSwap; }
@@ -52,13 +55,20 @@ public class GameManager : Singleton<GameManager>
         SpawnManager.Instance.GenerateFirstRoom();
     }
 
+    // Handles player death
+    public void HandlePlayerDeath()
+    {
+        EndGame();
+        UIManager.Instance.EnableDeathMenu();
+    }
+
     // Ends the game, disabling the level
     public void EndGame()
     {
         OnGameEnd?.Invoke();
         IsGameActive = false;
         ScoreManager.Instance.SubmitScore();
-        UIManager.Instance.EnableDeathMenu();
+        SpawnManager.Instance.ClearSpawnData();
     }
 
     // Updates the mobile position of the UI
@@ -89,6 +99,19 @@ public class GameManager : Singleton<GameManager>
             default:
                 break;
         }
+    }
+
+    // Marks the scene as loaded, signalling it to any listeners
+    public void HandleSceneLoad()
+    {
+        IsSceneLoaded = true;
+        OnSceneLoad?.Invoke();
+    }
+
+    // Marks the scene as unloaded
+    public void HandleSceneUnload()
+    {
+        IsSceneLoaded = false;
     }
 
     public bool IsGamePaused() { return Time.timeScale == 0.0f; }
