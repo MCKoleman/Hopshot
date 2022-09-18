@@ -58,7 +58,7 @@ public class Character : MonoBehaviour
     // Handles the character's death
     protected virtual void HandleDeath()
     {
-        _isDead = false;
+        _isDead = true;
         OnDeath?.Invoke();
         if(!DoesRespawn)
         {
@@ -109,7 +109,7 @@ public class Character : MonoBehaviour
     {
         curHealth = Mathf.Clamp(curHealth - info.damage, 0, maxHealth);
         OnHealthChange?.Invoke(HealthPercent);
-        if (curHealth <= 0)
+        if (curHealth <= 0 && !IsDead)
             HandleDeath();
     }
 

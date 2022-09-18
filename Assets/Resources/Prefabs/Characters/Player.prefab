@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1760360193}
   - component: {fileID: 734056934091415824}
   m_Layer: 7
-  m_Name: Boop_Gun
+  m_Name: BoopGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -383,6 +383,7 @@ MonoBehaviour:
   speedMods: {fileID: 11400000, guid: 1901162bb077ec34fa655fbe78e99485, type: 2}
   maxJumpCooldown: 0.2
   maxCoyoteTime: 0.1
+  maxBoopDelayTime: 0.1
   maxBounceTime: 0.1
 --- !u!114 &4701958621740524663
 MonoBehaviour:

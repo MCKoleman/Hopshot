@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target_Light : MonoBehaviour
+public class TargetLight : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 

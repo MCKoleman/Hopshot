@@ -9,23 +9,26 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private bool isEnemy = true;
     [SerializeField]
+    private bool damagesEnemies = false;
+    [SerializeField]
     private Character attacker;
     private Rigidbody2D rb;
 
     // Initializes the projectile
-    public void InitProjectile(Vector2 velocity, Character _attacker, int _damage = 1, bool _isEnemy = true)
+    public void InitProjectile(Vector2 velocity, Character _attacker, bool _damagesEnemies, int _damage = 1, bool _isEnemy = true)
     {
         rb = this.GetComponent<Rigidbody2D>();
         attacker = _attacker;
         damage = _damage;
         isEnemy = _isEnemy;
+        damagesEnemies = _damagesEnemies;
         rb.velocity = velocity;
     }
 
     // Handles collision between the projectile and it's target
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if((collision.collider.CompareTag("Player") && isEnemy) || (collision.collider.CompareTag("Enemy") && !isEnemy))
+        if((collision.collider.CompareTag("Player") && isEnemy) || (collision.collider.CompareTag("Enemy") && (!isEnemy || damagesEnemies)))
         {
             Character tempChar = collision.collider.GetComponent<Character>();
             if (tempChar != null)

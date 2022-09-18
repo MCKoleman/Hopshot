@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret_Logic : MonoBehaviour
+public class TurretLogic : MonoBehaviour
 {
     [Header("Armory")]
     [SerializeField]
-    private Turret_Weapons gun;
+    private TurretWeapons gun;
     [SerializeField]
-    private Target_Light led;
+    private TargetLight led;
     [SerializeField]
     private GameObject bullet;
     [SerializeField]
@@ -46,7 +46,7 @@ public class Turret_Logic : MonoBehaviour
 
     private void Update()
     {
-        if (!isPlayerInRange)
+        if (!isPlayerInRange || !GameManager.Instance.IsGameActive)
             return;
 
         // Warmup the gun before firing
@@ -91,6 +91,6 @@ public class Turret_Logic : MonoBehaviour
         Vector2 direction = (fireStartPoint.transform.position *Vector2.right);
         Projectile tempProj = Instantiate(bullet, fireStartPoint.position, Quaternion.identity, PrefabManager.Instance.projectileHolder).GetComponent<Projectile>();
         if (tempProj != null)
-            tempProj.InitProjectile(bulletSpeed * direction, character);
+            tempProj.InitProjectile(bulletSpeed * direction, character, true);
     }
 }
