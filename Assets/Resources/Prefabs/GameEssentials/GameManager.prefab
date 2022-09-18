@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
-  DEBUG_DISABLE_GENERATION: 1
+  DEBUG_DISABLE_GENERATION: 0
   DEBUG_SIMULATE_MOBILE: 0
 --- !u!1 &3948745073147285447
 GameObject:
@@ -278,7 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d99343dd1bb1c6438ac7032a98afeb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
 --- !u!1 &7695479558249168184
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,11 +14,13 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private UIMainMenu mainMenu;
 
+    // Initializes the singleton
     public void InitSingleton()
     {
         UnpauseGame();
     }
 
+    // Enables the HUD
     public void EnableHUD()
     {
         hud.Enable();
@@ -27,6 +29,7 @@ public class UIManager : Singleton<UIManager>
         mainMenu.Disable();
     }
 
+    // Enables the main menu
     public void EnableMainMenu()
     {
         hud.Disable();
@@ -35,6 +38,16 @@ public class UIManager : Singleton<UIManager>
         mainMenu.Enable();
     }
 
+    // Enables the death menu
+    public void EnableDeathMenu()
+    {
+        hud.Disable();
+        deathMenu.Enable();
+        pauseMenu.Disable();
+        mainMenu.Disable();
+    }
+
+    // Returns to the main menu
     public void ReturnToMainMenu()
     {
         GameManager.Instance.EndGame();
