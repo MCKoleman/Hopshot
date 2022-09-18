@@ -6,9 +6,16 @@ using LootLocker.Requests;
 public class LootLockerManager : Singleton<LootLockerManager>
 {
     private string memberID = "";
-    private int leaderboardID = 7134;
+    private string playerName = "";
+    private int leaderboardID = 7136;
 
     public void InitSingleton()
+    {
+        InitLootLocker();
+    }
+
+    // Initializes LootLocker and signs in
+    public void InitLootLocker()
     {
         LootLockerSDKManager.StartGuestSession((response) =>
         {
@@ -36,7 +43,7 @@ public class LootLockerManager : Singleton<LootLockerManager>
         if (GetUserHighscore() >= score)
             return;
 
-        LootLockerSDKManager.SubmitScore(memberID, score, leaderboardID, (response) =>
+        LootLockerSDKManager.SubmitScore(memberID, score, leaderboardID, playerName, (response) =>
         {
             if(response.statusCode == 200)
             {
@@ -64,6 +71,8 @@ public class LootLockerManager : Singleton<LootLockerManager>
             {
                 Debug.Log($"[LootLocker] Successfully retrieved player {memberID} score");
                 trackedScore = response.score;
+                if (response.score != 0 && playerName != response.metadata)
+                    playerName = response.metadata;
             }
             else
             {
