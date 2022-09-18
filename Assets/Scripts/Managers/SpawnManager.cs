@@ -47,18 +47,12 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         prevRoom = null;
         if (curRoom == null)
-        {
-            var rooms = GameObject.FindGameObjectsWithTag("Room");
-            if (rooms.Length != 0)
-                curRoom = rooms[0].GetComponent<Room>();
-            else
-                curRoom = SpawnRoom(0, Vector3.zero);
-        }
+            curRoom = SpawnRoom(0, Vector3.zero);
         nextRoom = SpawnRoom(1, curRoom.GetNextRoomPos());
     }
 
     // Handles completing the current room, destroying previous the previous room and spawning the next one
-    private void HandleRoomComplete(Room.RoomType roomType)
+    private void HandleRoomComplete()
     {
         CurRoomIndex++;
 

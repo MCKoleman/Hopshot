@@ -11,28 +11,10 @@ public class UIManager : Singleton<UIManager>
     private UIPauseMenu pauseMenu;
     [SerializeField]
     private UIDeathMenu deathMenu;
-    [SerializeField]
-    private GameObject mainMenu;
 
     public void InitSingleton()
     {
         UnpauseGame();
-    }
-
-    public void EnableHUD()
-    {
-        hud.Enable();
-        pauseMenu.Disable();
-        deathMenu.Disable();
-        mainMenu.SetActive(false);
-    }
-
-    public void EnableMainMenu()
-    {
-        hud.Disable();
-        deathMenu.Disable();
-        pauseMenu.Disable();
-        mainMenu.SetActive(true);
     }
 
     #region Pausing

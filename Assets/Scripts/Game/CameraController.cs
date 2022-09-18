@@ -24,12 +24,12 @@ public class CameraController : MonoBehaviour
         initialY = this.transform.position.y;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (!shouldFollow)
             return;
 
-        latestX = Mathf.Lerp(this.transform.position.x, Mathf.Max(GetTargetX(), latestX + GetMoveDisplacement()), followSpeed * Time.fixedDeltaTime);
+        latestX = Mathf.Lerp(this.transform.position.x, Mathf.Max(GetTargetX(), latestX + GetMoveDisplacement()), followSpeed * Time.deltaTime);
         this.transform.position = new Vector3(latestX, initialY, this.transform.position.z);
     }
 
