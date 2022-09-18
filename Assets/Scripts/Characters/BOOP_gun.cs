@@ -26,7 +26,7 @@ public class BOOP_gun : MonoBehaviour
 
     private void Shoot()
     {
-        Vector2 direction = (spawn.transform.position * Vector2.right) * -1.0f;
+        Vector2 direction = (spawn.transform.position * Vector2.right);
         GameObject loadShot = Instantiate(bullet, spawn.position, Quaternion.identity);
         loadShot.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed);
         chargeUp = Time.time + chargeTime;
