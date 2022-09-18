@@ -26,9 +26,7 @@ public class Room : MonoBehaviour
         if (spawnNodeHolder == null)
             return;
 
-        // Add all nodes from the spawn node holder to the content list
-        foreach(Transform temp in spawnNodeHolder)
-            spawnNodes.Add(temp.GetComponent<ContentNode>());
+        GetSpawnNodes();
     }
 
     // Initializes all the rooms components
@@ -39,12 +37,20 @@ public class Room : MonoBehaviour
         roomType = _type;
 
         // Only spawn content if there is any
-        if (spawnNodes == null || spawnNodes.Count == 0)
-            return;
+        if (spawnNodes.Count == 0)
+            GetSpawnNodes();
 
         // Spawn all content
         foreach(ContentNode node in spawnNodes)
             node.InitContent();
+    }
+
+    // Gets all the spawn nodes of this object
+    private void GetSpawnNodes()
+    {
+        // Add all nodes from the spawn node holder to the content list
+        foreach (Transform temp in spawnNodeHolder)
+            spawnNodes.Add(temp.GetComponent<ContentNode>());
     }
 
     // Completes the room

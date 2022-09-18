@@ -160,10 +160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7b7e31734ce094caf8ba99ab4cb498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 0
-  shouldFollow: 0
-  moveSpeed: 0.3
-  minScreenPos: 0.7
+  followSpeed: 2.5
+  shouldFollow: 1
+  moveSpeed: 5
+  minScreenPos: 0.5
   latestX: -3.4028235e+38
 --- !u!81 &2484703488732807162
 AudioListener:

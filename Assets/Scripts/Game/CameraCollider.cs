@@ -16,6 +16,13 @@ public class CameraCollider : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Destroy enemies that collide
+        if (collision.collider.CompareTag("Enemy") || collision.collider.CompareTag("Projectile"))
+        {
+            Destroy(collision.gameObject);
+            return;
+        }
+
         if (!collision.collider.CompareTag("Player"))
             return;
 
@@ -24,13 +31,6 @@ public class CameraCollider : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        // Destroy enemies that collide
-        if (collision.collider.CompareTag("Enemy") || collision.collider.CompareTag("Projectile"))
-        {
-            Destroy(collision.gameObject);
-            return;
-        }
-
         if (!collision.collider.CompareTag("Player"))
             return;
 

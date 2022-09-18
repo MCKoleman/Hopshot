@@ -35,12 +35,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
+    private PlayerCharacter character;
 
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
         sprite = this.GetComponent<SpriteRenderer>();
+        character = this.GetComponent<PlayerCharacter>();
     }
 
     private void FixedUpdate()
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour
     #region Helper Functions
     private bool CanTakeInput()
     {
-        return GameManager.Instance.IsGameActive && !UIManager.Instance.IsPaused;
+        return GameManager.Instance.IsGameActive && !UIManager.Instance.IsPaused && !character.IsDead;
     }
 
     // Sets the players mass as either heavy or normal
@@ -206,7 +208,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Returns the player's position
-    public Vector2 GetPos() { return rb.position; }
+    public Vector2 GetPos() { return this.transform.position; }
     #endregion
 
     #region Input Context Handlers

@@ -56,6 +56,6 @@ public class CameraController : MonoBehaviour
     // Moves the camera slowly to the right
     private float GetMoveDisplacement()
     {
-        return moveSpeed * Time.deltaTime * SpawnManager.Instance.GetCameraMoveMod();
+        return moveSpeed * Time.fixedDeltaTime * SpawnManager.Instance.GetCameraMoveMod();
     }
 }
