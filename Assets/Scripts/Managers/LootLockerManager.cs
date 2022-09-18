@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using LootLocker.Requests;
+using LootLocker.Requests;
 
 public class LootLockerManager : Singleton<LootLockerManager>
 {
     private string memberID = "";
     private string playerName = "";
     private int leaderboardID = 7136;
+    private bool isLoggedIn = false;
 
     public void InitSingleton()
     {
@@ -17,7 +18,7 @@ public class LootLockerManager : Singleton<LootLockerManager>
     // Initializes LootLocker and signs in
     public void InitLootLocker()
     {
-        /*
+        
         LootLockerSDKManager.StartGuestSession((response) =>
         {
             if (!response.success)
@@ -30,7 +31,14 @@ public class LootLockerManager : Singleton<LootLockerManager>
 
             // Store player ID
             memberID = response.player_id.ToString();
-        });*/
+            isLoggedIn = true;
+        });
+    }
+
+    // Sets the player's username
+    public void SetUsername(string name)
+    {
+        playerName = name;
     }
 
     // Submits the player's score to leaderboard
@@ -43,7 +51,7 @@ public class LootLockerManager : Singleton<LootLockerManager>
         // Only submit a new score if it is higher than the previous one
         if (GetUserHighscore() >= score)
             return;
-        /*
+        
         LootLockerSDKManager.SubmitScore(memberID, score, leaderboardID, playerName, (response) =>
         {
             if(response.statusCode == 200)
@@ -54,7 +62,7 @@ public class LootLockerManager : Singleton<LootLockerManager>
             {
                 Debug.Log("[LootLocker]: Failed to submit score");
             }
-        });*/
+        });
     }
 
     // Returns the player's highscore if one exists
@@ -66,7 +74,7 @@ public class LootLockerManager : Singleton<LootLockerManager>
         if (memberID == "")
             return 0;
 
-        /*
+        
         LootLockerSDKManager.GetMemberRank(leaderboardID, memberID, (response) =>
         {
             if (response.statusCode == 200)
@@ -80,7 +88,10 @@ public class LootLockerManager : Singleton<LootLockerManager>
             {
                 Debug.Log($"[LootLocker] Failed to retrieve player {memberID} score: {response.Error}");
             }
-        });*/
+        });
         return trackedScore;
     }
+
+    public bool GetIsLoggedIn() { return isLoggedIn; }
+    public bool HasName() { return playerName != ""; }
 }

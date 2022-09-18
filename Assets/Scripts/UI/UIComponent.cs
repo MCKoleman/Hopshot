@@ -8,13 +8,13 @@ public class UIComponent : MonoBehaviour
     private GameObject uiElement;
     public bool IsEnabled { get; private set; }
 
-    public void Enable()
+    public virtual void Enable()
     {
         uiElement.SetActive(true);
         IsEnabled = true;
     }
 
-    public void Disable()
+    public virtual void Disable()
     {
         uiElement.SetActive(false);
         IsEnabled = false;

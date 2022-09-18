@@ -12,7 +12,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private UIDeathMenu deathMenu;
     [SerializeField]
-    private GameObject mainMenu;
+    private UIMainMenu mainMenu;
 
     public void InitSingleton()
     {
@@ -24,7 +24,7 @@ public class UIManager : Singleton<UIManager>
         hud.Enable();
         pauseMenu.Disable();
         deathMenu.Disable();
-        mainMenu.SetActive(false);
+        mainMenu.Disable();
     }
 
     public void EnableMainMenu()
@@ -32,7 +32,7 @@ public class UIManager : Singleton<UIManager>
         hud.Disable();
         deathMenu.Disable();
         pauseMenu.Disable();
-        mainMenu.SetActive(true);
+        mainMenu.Enable();
     }
 
     public void ReturnToMainMenu()
