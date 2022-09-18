@@ -42,6 +42,7 @@ public class GameManager : Singleton<GameManager>
     // Starts the game, generating the level
     public void StartGame()
     {
+        OnGameStart?.Invoke();
         IsGameActive = true;
         ScoreManager.Instance.InitHighscore();
 
@@ -54,9 +55,10 @@ public class GameManager : Singleton<GameManager>
     // Ends the game, disabling the level
     public void EndGame()
     {
+        OnGameEnd?.Invoke();
         IsGameActive = false;
         ScoreManager.Instance.SubmitScore();
-        PrefabManager.Instance.ClearContent();
+        UIManager.Instance.EnableDeathMenu();
     }
 
     // Updates the mobile position of the UI

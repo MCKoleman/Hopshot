@@ -53,7 +53,7 @@ public class Turret_Logic : MonoBehaviour
 
     private void Update()
     {
-        if (!isPlayerInRange)
+        if (!isPlayerInRange || !GameManager.Instance.IsGameActive)
             return;
 
         // Warmup the gun before firing

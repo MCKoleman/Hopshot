@@ -50,6 +50,7 @@ public class UIManager : Singleton<UIManager>
     // Returns to the main menu
     public void ReturnToMainMenu()
     {
+        PrefabManager.Instance.ClearContent();
         GameManager.Instance.EndGame();
     }
 

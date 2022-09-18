@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Only check ground collisions
-        if (!collision.gameObject.CompareTag("Ground"))
+        if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("Friend") && !collision.gameObject.CompareTag("Enemy"))
             return;
 
         // Only count grounding if colliding on angle smaller than MAX_SLOPE_ANGLE

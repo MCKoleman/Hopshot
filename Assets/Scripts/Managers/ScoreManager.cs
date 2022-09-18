@@ -47,7 +47,7 @@ public class ScoreManager : Singleton<ScoreManager>
     public void SubmitScore()
     {
         LootLockerManager.Instance.SubmitScore(CurScore);
-        CurScore = 0;
+        Highscore = LootLockerManager.Instance.GetUserHighscore();
 
         /*
 #if UNITY_EDITOR
