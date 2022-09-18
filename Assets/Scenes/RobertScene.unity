@@ -884,25 +884,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 638eef69d95b7b644be5ee68a2e68b9e, type: 3}
---- !u!1 &1953810426 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2614443034213569409, guid: 44408c5b5560d404f8ea817761fc0b24, type: 3}
-  m_PrefabInstance: {fileID: 1234996824}
+--- !u!4 &1671636082 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7608021487819044756, guid: ed55328e3badb64448dba34f50d223ba, type: 3}
+  m_PrefabInstance: {fileID: 4541995054795629650}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1953810427
-MonoBehaviour:
+--- !u!1 &1693785634
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953810426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 268bcf2cf785bbc4eb710ef412e848d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1
-  respawnTime: 5
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1693785635}
+  m_Layer: 7
+  m_Name: Fire_Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1693785635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693785634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1760360192}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1760360191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1760360192}
+  m_Layer: 7
+  m_Name: Boop_Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1760360192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760360191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1693785635}
+  m_Father: {fileID: 1671636082}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1409498018080249722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -974,6 +1021,10 @@ PrefabInstance:
     - target: {fileID: 3495102205826365418, guid: 17b10a4eba148c641807649b286c2494, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618742451494298396, guid: 17b10a4eba148c641807649b286c2494, type: 3}
+      propertyPath: DEBUG_DISABLE_GENERATION
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4799186142358836278, guid: 17b10a4eba148c641807649b286c2494, type: 3}
       propertyPath: m_RootOrder

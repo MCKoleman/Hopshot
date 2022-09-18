@@ -12,14 +12,9 @@ public class Turret_Logic : MonoBehaviour
     private GameObject bullet;
     [SerializeField]
     private Transform fireStartPoint;
-    [SerializeField]
-    private Transform fireAimPoint;
 
     [SerializeField]
     private float bulletSpeed;
-    [SerializeField]
-    private bool faceLeft;
-    private float correctPath = 1.0f;
 
     [SerializeField]
     private float maxWarmupTime = 0.3f;
@@ -35,9 +30,6 @@ public class Turret_Logic : MonoBehaviour
     {
         gun.StartFire += Wake;
         gun.StopFire += Sleep;
-
-        if (faceLeft)
-            correctPath = -1.0f;
     }
 
     private void OnDisable()
@@ -95,7 +87,7 @@ public class Turret_Logic : MonoBehaviour
     // Fires the projectile
     private void FireProjectile()
     {
-        Vector2 direction = (fireStartPoint.transform.position - fireAimPoint.transform.position) * correctPath;
+        Vector2 direction = (fireStartPoint.transform.position *Vector2.right);
         Projectile tempProj = Instantiate(bullet, fireStartPoint.position, Quaternion.identity, PrefabManager.Instance.projectileHolder).GetComponent<Projectile>();
         if (tempProj != null)
             tempProj.InitProjectile(bulletSpeed * direction, character);
