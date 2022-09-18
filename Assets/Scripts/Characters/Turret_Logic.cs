@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Turret_Logic : MonoBehaviour
 {
+    [Header("Armory")]
     [SerializeField]
     private Turret_Weapons gun;
     [SerializeField]
@@ -13,9 +14,9 @@ public class Turret_Logic : MonoBehaviour
     [SerializeField]
     private Transform fireStartPoint;
 
+    [Header("Stats")]
     [SerializeField]
     private float bulletSpeed;
-
     [SerializeField]
     private float maxWarmupTime = 0.3f;
     private float curWarmupTime = 0.0f;

@@ -318,7 +318,6 @@ MonoBehaviour:
   led: {fileID: 2614443034023411446}
   bullet: {fileID: 9185579190300579195, guid: 5217403555c388f468773f7029d696f7, type: 3}
   fireStartPoint: {fileID: 8117492066218147684}
-  fireAimPoint: {fileID: 3785891213668190323}
   bulletSpeed: 2
   maxWarmupTime: 0.5
   maxFireCooldown: 0.4

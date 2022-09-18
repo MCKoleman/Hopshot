@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     private float maxCoyoteTime = 0.1f;
     private float curCoyoteTime = 0.0f;
     [SerializeField]
+    private float maxBoopDelayTime = 0.1f;
+    private float curBoopDelayTime = 0.0f;
+    [SerializeField]
     private float maxBounceTime = 0.1f;
     private float curBounceTime = 0.0f;
     private float groundedTime = 0.0f;
@@ -68,6 +71,8 @@ public class PlayerController : MonoBehaviour
             curJumpCooldown = Mathf.Max(curJumpCooldown - Time.fixedDeltaTime, 0.0f);
         if (curCoyoteTime > 0.0f && !isGrounded)
             curCoyoteTime = Mathf.Max(curCoyoteTime - Time.fixedDeltaTime, 0.0f);
+        if (curBoopDelayTime > 0.0f)
+            curBoopDelayTime = Mathf.Max(curBoopDelayTime - Time.fixedDeltaTime, 0.0f);
         if (curBounceTime > 0.0f)
             curBounceTime = Mathf.Max(curBounceTime - Time.fixedDeltaTime, 0.0f);
         if (isGrounded)
@@ -166,7 +171,7 @@ public class PlayerController : MonoBehaviour
         // TOOD: Set anim state when aiming backwards
         anim?.SetBool("facingForward", true);
         if(rb.velocity.x != 0.0f)
-            sprite.flipX = rb.velocity.x < 0.0f;
+            this.transform.localScale = new Vector3(rb.velocity.x > 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
         //anim?.SetBool("facingForward", rb.velocity.x >= 0.0f);
     }
 

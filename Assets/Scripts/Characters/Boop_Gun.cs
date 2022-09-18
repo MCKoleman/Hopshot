@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class Boop_Gun : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Armory")]
+    [SerializeField]
+    private GameObject bullet;
+    [SerializeField]
+    private Transform fireStartPoint;
+    private Character character;
+
+    [Header("Stats")]
+    [SerializeField]
+    private float bulletSpeed;
+
+    private void Start()
     {
-        
+        character = this.GetComponent<Character>();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Fires the projectile
+    private void FireProjectile()
     {
-        
+        Vector2 direction = (fireStartPoint.transform.position * Vector2.right);
+        Projectile tempProj = Instantiate(bullet, fireStartPoint.position, Quaternion.identity, PrefabManager.Instance.projectileHolder).GetComponent<Projectile>();
+        if (tempProj != null)
+            tempProj.InitProjectile(bulletSpeed * direction, character);
     }
 }
