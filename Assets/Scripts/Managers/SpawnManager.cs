@@ -42,14 +42,6 @@ public class SpawnManager : Singleton<SpawnManager>
 
     }
 
-    // Clears the spawn data of the manager
-    public void ClearSpawnData()
-    {
-        prevRoom = null;
-        curRoom = null;
-        nextRoom = null;
-    }
-
     #region Room Spawning
     public void GenerateFirstRoom()
     {

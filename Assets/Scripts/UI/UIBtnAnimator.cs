@@ -10,16 +10,6 @@ public class UIBtnAnimator : MonoBehaviour
     [SerializeField]
     private float scaleSpeed = 0.2f;
 
-    private void OnEnable()
-    {
-        this.transform.localScale = Vector3.one;
-    }
-
-    private void OnDisable()
-    {
-        this.transform.localScale = Vector3.one;
-    }
-
     public void Highlight()
     {
         this.transform.DOScale(highlightScale, scaleSpeed);

@@ -13,8 +13,6 @@ public class UIManager : Singleton<UIManager>
     private UIDeathMenu deathMenu;
     [SerializeField]
     private UIMainMenu mainMenu;
-    [SerializeField]
-    private UISceneTransition sceneTransition;
 
     // Initializes the singleton
     public void InitSingleton()
@@ -55,20 +53,6 @@ public class UIManager : Singleton<UIManager>
         PrefabManager.Instance.ClearContent();
         GameManager.Instance.EndGame();
     }
-
-    #region Transitions
-    // Starts the scene fade out transition
-    public void SceneFadeOut()
-    {
-        sceneTransition.FadeOut();
-    }
-
-    // Starts the scene fade in transition
-    public void SceneFadeIn()
-    {
-        sceneTransition.FadeIn();
-    }
-    #endregion
 
     #region Pausing
     // Toggles the paused state of the game
