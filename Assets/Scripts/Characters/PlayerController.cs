@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
     private float maxCoyoteTime = 0.1f;
     private float curCoyoteTime = 0.0f;
     [SerializeField]
-    private float maxBoopDelayTime = 0.1f;
-    private float curBoopDelayTime = 0.0f;
+    private float maxBoopCooldown = 0.1f;
+    private float curBoopCooldown = 0.0f;
     [SerializeField]
     private float maxBounceTime = 0.1f;
     private float curBounceTime = 0.0f;
@@ -26,19 +26,23 @@ public class PlayerController : MonoBehaviour
     private float maxAirMovementCooldown = 0.1f;
     private float curAirMovementCooldown = 0.0f;
 
+    // State data
     private float moveDelta;
     private bool isGrounded = true;
 
+    // Constants
     private const float JUMP_THRESHOLD = 0.3f;
     private const float MAX_SLOPE_ANGLE = 45.0f;
     private const float MINIMUM_GROUNDED_TIME = 0.1f;
     private const float MINIMUM_GROUNDED_DROP = -0.3f;
     private const float ANIM_POW_MOD = 0.3678795f;
 
+    // Components
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
     private PlayerCharacter character;
+    private BoopGun boopGun;
 
     private void Start()
     {
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour
         anim = this.GetComponent<Animator>();
         sprite = this.GetComponent<SpriteRenderer>();
         character = this.GetComponent<PlayerCharacter>();
+        boopGun = this.GetComponentInChildren<BoopGun>();
     }
 
     private void FixedUpdate()
@@ -71,8 +76,8 @@ public class PlayerController : MonoBehaviour
             curJumpCooldown = Mathf.Max(curJumpCooldown - Time.fixedDeltaTime, 0.0f);
         if (curCoyoteTime > 0.0f && !isGrounded)
             curCoyoteTime = Mathf.Max(curCoyoteTime - Time.fixedDeltaTime, 0.0f);
-        if (curBoopDelayTime > 0.0f)
-            curBoopDelayTime = Mathf.Max(curBoopDelayTime - Time.fixedDeltaTime, 0.0f);
+        if (curBoopCooldown > 0.0f)
+            curBoopCooldown = Mathf.Max(curBoopCooldown - Time.fixedDeltaTime, 0.0f);
         if (curBounceTime > 0.0f)
             curBounceTime = Mathf.Max(curBounceTime - Time.fixedDeltaTime, 0.0f);
         if (isGrounded)
@@ -85,7 +90,7 @@ public class PlayerController : MonoBehaviour
         return (isAccelerating ? speedMods.MOVE_ACC_MOD : speedMods.MOVE_DEC_MOD) * (isGrounded ? 1.0f : (isAccelerating ? speedMods.AIR_ACC_MOD : speedMods.AIR_DEC_MOD));
     }
 
-    #region Movement
+    #region Input Handles
     // Sets the target movement of the player
     public void HandleMove(Vector2 delta)
     {
@@ -115,10 +120,12 @@ public class PlayerController : MonoBehaviour
         SetIsGrounded(false);
     }
 
-    //
+    // Handles player attacking
     public void HandleAttack()
     {
         // TODO: Handle attacking
+        if(curBoopCooldown <= 0.0f)
+            boopGun.FireProjectile();
     }
 
     //

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boop_Gun : MonoBehaviour
+public class BoopGun : MonoBehaviour
 {
     [Header("Armory")]
     [SerializeField]
@@ -21,11 +21,11 @@ public class Boop_Gun : MonoBehaviour
     }
 
     // Fires the projectile
-    private void FireProjectile()
+    public void FireProjectile()
     {
         Vector2 direction = (fireStartPoint.transform.position * Vector2.right);
         Projectile tempProj = Instantiate(bullet, fireStartPoint.position, Quaternion.identity, PrefabManager.Instance.projectileHolder).GetComponent<Projectile>();
         if (tempProj != null)
-            tempProj.InitProjectile(bulletSpeed * direction, character);
+            tempProj.InitProjectile(bulletSpeed * direction, character, false);
     }
 }

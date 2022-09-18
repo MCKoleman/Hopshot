@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret_Weapons : MonoBehaviour
+public class TurretWeapons : MonoBehaviour
 {
     public delegate void Gun();
     public event Gun StartFire;
