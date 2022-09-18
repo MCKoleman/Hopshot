@@ -13,6 +13,8 @@ public class TurretLogic : MonoBehaviour
     private GameObject bullet;
     [SerializeField]
     private Transform fireStartPoint;
+    [SerializeField]
+    private Transform fireTowards;
 
     [Header("Stats")]
     [SerializeField]
@@ -88,7 +90,7 @@ public class TurretLogic : MonoBehaviour
     // Fires the projectile
     private void FireProjectile()
     {
-        Vector2 direction = (fireStartPoint.transform.position *Vector2.right);
+        Vector2 direction = (fireTowards.transform.position - fireStartPoint.transform.position);
         Projectile tempProj = Instantiate(bullet, fireStartPoint.position, Quaternion.identity, PrefabManager.Instance.projectileHolder).GetComponent<Projectile>();
         if (tempProj != null)
             tempProj.InitProjectile(bulletSpeed * direction, character, true);

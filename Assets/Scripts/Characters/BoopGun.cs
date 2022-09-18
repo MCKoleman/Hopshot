@@ -9,6 +9,9 @@ public class BoopGun : MonoBehaviour
     private GameObject bullet;
     [SerializeField]
     private Transform fireStartPoint;
+    [SerializeField]
+    private Transform fireTowards;
+
     private Character character;
 
     [Header("Stats")]
@@ -21,11 +24,14 @@ public class BoopGun : MonoBehaviour
     }
 
     // Fires the projectile
-    public void FireProjectile()
+    public Vector2 FireProjectile()
     {
-        Vector2 direction = (fireStartPoint.transform.position * Vector2.right);
+        Vector2 direction = (fireTowards.transform.position - fireStartPoint.transform.position) * -1.0f;
         Projectile tempProj = Instantiate(bullet, fireStartPoint.position, Quaternion.identity, PrefabManager.Instance.projectileHolder).GetComponent<Projectile>();
         if (tempProj != null)
-            tempProj.InitProjectile(bulletSpeed * direction, character, false);
+            tempProj.InitProjectile(bulletSpeed * direction, character, true);
+        else
+            return Vector2.zero;
+        return direction;
     }
 }

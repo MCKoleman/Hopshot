@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [Header("Move Speed Mods")]
     [SerializeField]
     private PlayerSpeedMods speedMods;
+    [SerializeField]
+    private float boopRecoil;
 
     [Header("Cooldowns")]
     [SerializeField]
@@ -125,7 +127,10 @@ public class PlayerController : MonoBehaviour
     {
         // TODO: Handle attacking
         if(curBoopCooldown <= 0.0f)
-            boopGun.FireProjectile();
+        {
+            Vector2 tempDirection = -1.0f * boopGun.FireProjectile();
+            rb.AddForce(boopRecoil * tempDirection);
+        }
     }
 
     //
