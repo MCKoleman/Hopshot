@@ -48,6 +48,21 @@ public class ScoreManager : Singleton<ScoreManager>
     {
         LootLockerManager.Instance.SubmitScore(CurScore);
         CurScore = 0;
+
+        /*
+#if UNITY_EDITOR
+        LootLockerManager.Instance.DEBUG_SubmitScore(5, "1234560", "Debug1");
+        LootLockerManager.Instance.DEBUG_SubmitScore(5, "1234561", "Debug2");
+        LootLockerManager.Instance.DEBUG_SubmitScore(10, "1234562", "Debug3");
+        LootLockerManager.Instance.DEBUG_SubmitScore(15, "1234563", "Debug4");
+        LootLockerManager.Instance.DEBUG_SubmitScore(20, "1234564", "Debug5");
+        LootLockerManager.Instance.DEBUG_SubmitScore(25, "1234565", "Debug6");
+        LootLockerManager.Instance.DEBUG_SubmitScore(30, "1234566", "Debug7");
+        LootLockerManager.Instance.DEBUG_SubmitScore(35, "1234567", "Debug8");
+        LootLockerManager.Instance.DEBUG_SubmitScore(40, "1234568", "Debug9");
+        LootLockerManager.Instance.DEBUG_SubmitScore(45, "1234569", "Debug10");
+        LootLockerManager.Instance.DEBUG_SubmitScore(50, "1234570", "Debug11");
+#endif*/
     }
 
     // Handles completing a room

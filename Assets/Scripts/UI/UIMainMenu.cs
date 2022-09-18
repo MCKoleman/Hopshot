@@ -6,6 +6,8 @@ public class UIMainMenu : UIComponent
 {
     [SerializeField]
     private GameObject loginScreen;
+    [SerializeField]
+    private UILeaderboard leaderboard;
 
     public override void Enable()
     {
