@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomEdge : MonoBehaviour
 {
-    public delegate void RoomComplete();
+    public delegate void RoomComplete(Room.RoomType roomType);
     public static event RoomComplete OnRoomComplete;
 
     private Room parentRoom;
@@ -23,7 +23,7 @@ public class RoomEdge : MonoBehaviour
 
         hasBeenActivated = true;
         parentRoom.CompleteRoom();
-        OnRoomComplete?.Invoke();
+        OnRoomComplete?.Invoke(parentRoom.GetRoomType());
         this.gameObject.SetActive(false);
     }
 }
