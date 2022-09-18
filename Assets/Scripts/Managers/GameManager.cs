@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField]
-    private bool DEBUG_DISABLE_GENERATION = true;
+    public bool DEBUG_DISABLE_GENERATION = true;
     [SerializeField]
     private bool DEBUG_SIMULATE_MOBILE = false;
 

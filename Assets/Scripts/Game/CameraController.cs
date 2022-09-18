@@ -56,6 +56,10 @@ public class CameraController : MonoBehaviour
     // Moves the camera slowly to the right
     private float GetMoveDisplacement()
     {
+#if UNITY_EDITOR
+        if (GameManager.Instance.DEBUG_DISABLE_GENERATION)
+            return 0.0f;
+#endif
         return moveSpeed * Time.fixedDeltaTime * SpawnManager.Instance.GetCameraMoveMod();
     }
 }
