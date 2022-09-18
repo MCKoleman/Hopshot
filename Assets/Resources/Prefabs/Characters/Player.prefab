@@ -250,14 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ef8a7d98349f6438753238dcf28046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
-  MOVE_ACC_MOD: 7
-  MOVE_DEC_MOD: 7
-  AIR_ACC_MOD: 0.5
-  AIR_DEC_MOD: 0.5
-  jumpForce: 10
-  massNormal: 1
-  massHeavy: 3
+  speedMods: {fileID: 11400000, guid: 1901162bb077ec34fa655fbe78e99485, type: 2}
   maxJumpCooldown: 0.2
   maxCoyoteTime: 0.1
   maxBounceTime: 0.1

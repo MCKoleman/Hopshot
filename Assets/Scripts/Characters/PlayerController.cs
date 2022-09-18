@@ -7,23 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Move Speed Mods")]
     [SerializeField]
-    private float moveSpeed = 5.0f;
-    [SerializeField]
-    private float MOVE_ACC_MOD = 5.0f;
-    [SerializeField]
-    private float MOVE_DEC_MOD = 5.0f;
-    [SerializeField]
-    private float AIR_ACC_MOD = 5.0f;
-    [SerializeField]
-    private float AIR_DEC_MOD = 5.0f;
-
-    [Header("Jump")]
-    [SerializeField]
-    private float jumpForce = 5.0f;
-    [SerializeField]
-    private float massNormal = 1.0f;
-    [SerializeField]
-    private float massHeavy = 3.0f;
+    private PlayerSpeedMods speedMods;
 
     [Header("Cooldowns")]
     [SerializeField]
@@ -87,14 +71,14 @@ public class PlayerController : MonoBehaviour
     // Returns the acceleration mod for the player's movement
     private float GetAccelerationMod(bool isAccelerating)
     {
-        return (isAccelerating ? MOVE_ACC_MOD : MOVE_DEC_MOD) * (isGrounded ? 1.0f : (isAccelerating ? AIR_ACC_MOD : AIR_DEC_MOD));
+        return (isAccelerating ? speedMods.MOVE_ACC_MOD : speedMods.MOVE_DEC_MOD) * (isGrounded ? 1.0f : (isAccelerating ? speedMods.AIR_ACC_MOD : speedMods.AIR_DEC_MOD));
     }
 
     #region Movement
     // Sets the target movement of the player
     public void HandleMove(Vector2 delta)
     {
-        moveDelta = delta.x * moveSpeed;
+        moveDelta = delta.x * speedMods.MOVE_SPEED;
 
         if (delta.y > JUMP_THRESHOLD)
             HandleJump();
@@ -114,7 +98,7 @@ public class PlayerController : MonoBehaviour
         // TODO: Play jump sound
 
         SetIsHeavy(false);
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        rb.velocity = new Vector2(rb.velocity.x, speedMods.JUMP_FORCE);
         curJumpCooldown = maxJumpCooldown;
         SetIsGrounded(false);
     }
@@ -172,17 +156,17 @@ public class PlayerController : MonoBehaviour
     // Sets the players mass as either heavy or normal
     private void SetIsHeavy(bool isHeavy)
     {
-        if ((rb.gravityScale == massHeavy && isHeavy) || (rb.gravityScale == massNormal && !isHeavy))
+        if ((rb.gravityScale == speedMods.GRAVITY_HEAVY && isHeavy) || (rb.gravityScale == speedMods.GRAVITY_NORMAL && !isHeavy))
             return;
 
         if (isHeavy)
         {
-            rb.gravityScale = massHeavy;
+            rb.gravityScale = speedMods.GRAVITY_HEAVY;
             anim?.SetTrigger("Falling");
         }
         else
         {
-            rb.gravityScale = massNormal;
+            rb.gravityScale = speedMods.GRAVITY_NORMAL;
         }
     }
 

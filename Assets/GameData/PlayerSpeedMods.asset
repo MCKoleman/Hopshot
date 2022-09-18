@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 977d4e82c1976fc4691c2096aa3bac87, type: 3}
-  m_Name: ContentList
+  m_Script: {fileID: 11500000, guid: f1614a3184f1a0941b157fadb61998e2, type: 3}
+  m_Name: PlayerSpeedMods
   m_EditorClassIdentifier: 
-  enemies:
-    list:
-    - weight: 1
-      prefab: {fileID: 1100599977781367694, guid: a4e01478b1c3c8b45b73ff4fedc4b74d, type: 3}
+  MOVE_SPEED: 10
+  MOVE_ACC_MOD: 10
+  MOVE_DEC_MOD: 5
+  AIR_ACC_MOD: 0.5
+  AIR_DEC_MOD: 0.1
+  JUMP_FORCE: 7
+  GRAVITY_NORMAL: 1
+  GRAVITY_HEAVY: 2
