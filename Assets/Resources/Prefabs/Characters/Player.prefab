@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 4701958621740524663}
   - component: {fileID: 8646311187271778165}
   - component: {fileID: 7380471942109035172}
+  - component: {fileID: 8286405314491614689}
   - component: {fileID: 5999206928576735642}
   m_Layer: 7
   m_Name: Player
@@ -486,13 +487,29 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 7099761895197880690}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4a730a49a2ee6514697ccdab08c24a63, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.9, y: 1.99}
   m_Direction: 0
+--- !u!70 &8286405314491614689
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7099761895197880690}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: fecb111fae42a174b983d0c9c5d796f0, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.975}
+  m_Size: {x: 0.2, y: 0.05}
+  m_Direction: 1
 --- !u!95 &5999206928576735642
 Animator:
   serializedVersion: 3

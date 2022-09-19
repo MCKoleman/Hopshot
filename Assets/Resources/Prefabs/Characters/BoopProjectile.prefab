@@ -208,10 +208,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boopForce: 10
-  playerBoopMod: 0.5
-  playerAirBoopMod: 0.5
+  playerBoopMod: 0.3
+  playerAirBoopMod: 0.8
   friendBoopMod: 2
   enemyBoopMod: 1
+  wallBoopMod: 0.7
+  maxUnscaledVelocity: 6
 --- !u!82 &6545604865845712438
 AudioSource:
   m_ObjectHideFlags: 0

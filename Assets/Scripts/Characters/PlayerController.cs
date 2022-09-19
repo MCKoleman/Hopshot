@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         }
         if (curBounceTime > 0.0f)
             curBounceTime = Mathf.Max(curBounceTime - Time.fixedDeltaTime, 0.0f);
-        if (isGrounded)
+        if (isGrounded || Mathf.Approximately(rb.velocity.y, 0.0f))
             groundedTime += Time.deltaTime;
     }
 

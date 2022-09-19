@@ -14,6 +14,10 @@ public class BoopProjectile : MonoBehaviour
     private float friendBoopMod = 10.0f;
     [SerializeField]
     private float enemyBoopMod = 5.0f;
+    [SerializeField]
+    private float wallBoopMod = 3.0f;
+    [SerializeField]
+    private float maxUnscaledVelocity = 10.0f;
 
     private Rigidbody2D rb;
 
@@ -49,8 +53,14 @@ public class BoopProjectile : MonoBehaviour
         if (tempRB == null)
             return;
 
+        // Bounce objects off of walls
+        BounceEffector bounce = collision.GetComponent<BounceEffector>();
+        if(bounce != null && bounce.IsAgainstWall)
+            totalBoopForce *= -bounce.GetWallDir * wallBoopMod;
+
         // Boops the rigidbody away from the projectile with inverse square force
         Vector2 distance = tempRB.position - rb.position;
-        tempRB.velocity += totalBoopForce / Mathf.Pow(distance.magnitude, 2.0f) * distance.normalized;
+        float tempForce = Mathf.Min(1.0f / Mathf.Pow(distance.magnitude, 2.0f), maxUnscaledVelocity);
+        tempRB.velocity += new Vector2(tempForce * totalBoopForce * distance.normalized.x, totalBoopForce * distance.normalized.y);
     }
 }
