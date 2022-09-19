@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 100
+  maxBounceForce: 12
 --- !u!1 &7937373503046273005
 GameObject:
   m_ObjectHideFlags: 0
