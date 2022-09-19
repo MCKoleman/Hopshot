@@ -205,6 +205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
   scoreList: {fileID: 11400000, guid: 41b5210cce9476a4db63ef2dc8846714, type: 2}
+  m_curScore: 0
+  m_highscore: 0
 --- !u!1 &6188327115902516998
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +329,7 @@ MonoBehaviour:
   contentList: {fileID: 11400000, guid: 433e6d7ff2ec807439f7ed80cc6bbe25, type: 2}
   diffMods: {fileID: 11400000, guid: 76bdcfc985cacc44e997b0ad533096fc, type: 2}
   hardRoomInterval: 4
-  firstRoomStartOffset: {x: -12.5, y: 0, z: 0}
+  firstRoomStartOffset: {x: 26, y: 0, z: 0}
   prevRoom: {fileID: 0}
   curRoom: {fileID: 0}
   nextRoom: {fileID: 0}

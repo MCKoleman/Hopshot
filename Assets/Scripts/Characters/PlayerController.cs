@@ -25,14 +25,14 @@ public class PlayerController : MonoBehaviour
     private float maxBounceTime = 0.1f;
     private float curBounceTime = 0.0f;
     private float groundedTime = 0.0f;
-    private float maxAirMovementCooldown = 0.1f;
-    private float curAirMovementCooldown = 0.0f;
 
     // State data
     private float moveDelta;
     [SerializeField]
     private bool isGrounded = true;
     private bool isFacingForward = true;
+    private List<GameObject> touchingGroundObjs;
+    public bool IsTouchingGround { get { return touchingGroundObjs.Count != 0; } }
 
     // Constants
     private const float MOUSE_AIM_ERROR_ZONE = 0.5f;
@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour
     // Components
     private Rigidbody2D rb;
     private Animator anim;
-    private SpriteRenderer sprite;
     private PlayerCharacter character;
     private BoopGun boopGun;
 
@@ -54,9 +53,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
-        sprite = this.GetComponent<SpriteRenderer>();
         character = this.GetComponent<PlayerCharacter>();
         boopGun = this.GetComponentInChildren<BoopGun>();
+        touchingGroundObjs = new List<GameObject>();
     }
 
     private void FixedUpdate()
@@ -67,9 +66,9 @@ public class PlayerController : MonoBehaviour
         SetAnimationStates();
 
         // Reset grounded status
-        if (isGrounded && rb.velocity.y < MINIMUM_GROUNDED_DROP)
+        if (isGrounded && rb.velocity.y < MINIMUM_GROUNDED_DROP && !IsTouchingGround)
             SetIsGrounded(false);
-        else if (!isGrounded && MathUtils.AlmostZero(rb.velocity.y, 2) && curAirMovementCooldown <= 0.0f && groundedTime >= MINIMUM_GROUNDED_TIME)
+        else if (!isGrounded && MathUtils.AlmostZero(rb.velocity.y, 2) && groundedTime >= MINIMUM_GROUNDED_TIME)
             SetIsGrounded(true);
 
         HandleCooldowns();
@@ -235,8 +234,20 @@ public class PlayerController : MonoBehaviour
             return;
 
         //Debug.Log($"Angle threshold passed");
+        // Remove touching object when leaving its collider
+        if (!touchingGroundObjs.Contains(collision.gameObject))
+            touchingGroundObjs.Add(collision.gameObject);
         anim?.SetTrigger("HitGround");
         SetIsGrounded(true);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!collision.collider.CompareTag("Ground") && !collision.collider.CompareTag("Friend") && !collision.collider.CompareTag("Enemy"))
+            return;
+        // Remove touching object when leaving its collider
+        if(touchingGroundObjs.Contains(collision.gameObject))
+            touchingGroundObjs.Remove(collision.gameObject);
     }
 
 
