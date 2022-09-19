@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693785634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8, y: 0, z: 0}
+  m_LocalPosition: {x: 1.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1760360192}
@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 1760360191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.32, y: 0.32, z: 1}
   m_Children:
   - {fileID: 1693785635}
   - {fileID: 3811477030449555744}
@@ -104,12 +104,12 @@ SpriteRenderer:
   m_SortingLayerID: -489852825
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5771a4f148d83db42805f2c36b277cef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ceb302849d44074499d09ba2b98d917, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 3, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -130,6 +130,9 @@ MonoBehaviour:
   bullet: {fileID: 6031813602265659510, guid: ba432531f72821c499eff0985cdeb08b, type: 3}
   fireStartPoint: {fileID: 1693785635}
   fireTowards: {fileID: 3811477030449555744}
+  pics:
+  - {fileID: 21300000, guid: 1ceb302849d44074499d09ba2b98d917, type: 3}
+  - {fileID: 21300000, guid: d4e2d2c76b9e9674cbd6af941bc9a9a2, type: 3}
   bulletSpeed: 500
 --- !u!1 &7099761895197880690
 GameObject:
@@ -482,7 +485,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8496589203347851978}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8, y: 0, z: 0}
+  m_LocalPosition: {x: 3.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1760360192}
