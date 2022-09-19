@@ -9,4 +9,18 @@ public class PlayerCharacter : Character
         base.HandleDeath();
         GameManager.Instance.HandlePlayerDeath();
     }
+
+    protected override void EnableCharacter()
+    {
+        base.EnableCharacter();
+        foreach (Transform temp in this.transform)
+            temp.gameObject.SetActive(true);
+    }
+
+    protected override void DisableCharacter()
+    {
+        base.DisableCharacter();
+        foreach (Transform temp in this.transform)
+            temp.gameObject.SetActive(false);
+    }
 }

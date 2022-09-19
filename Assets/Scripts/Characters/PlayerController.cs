@@ -30,9 +30,11 @@ public class PlayerController : MonoBehaviour
 
     // State data
     private float moveDelta;
+    [SerializeField]
     private bool isGrounded = true;
 
     // Constants
+    private const float MIN_LOOK_THRESHOLD = 0.1f;
     private const float JUMP_THRESHOLD = 0.3f;
     private const float MAX_SLOPE_ANGLE = 45.0f;
     private const float MINIMUM_GROUNDED_TIME = 0.1f;
@@ -188,7 +190,7 @@ public class PlayerController : MonoBehaviour
         // TODO: Flip sprite when facing backwards
         // TOOD: Set anim state when aiming backwards
         anim?.SetBool("facingForward", true);
-        if(rb.velocity.x != 0.0f)
+        if(Mathf.Abs(rb.velocity.x) > MIN_LOOK_THRESHOLD)
             this.transform.localScale = new Vector3(rb.velocity.x > 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
         //anim?.SetBool("facingForward", rb.velocity.x >= 0.0f);
     }
@@ -199,12 +201,12 @@ public class PlayerController : MonoBehaviour
         if (!collision.collider.CompareTag("Ground") && !collision.collider.CompareTag("Friend") && !collision.collider.CompareTag("Enemy"))
             return;
 
-        Debug.Log($"Player collided with [{collision.collider.name}]");
+        //Debug.Log($"Player collided with [{collision.collider.name}]");
         // Only count grounding if colliding on angle smaller than MAX_SLOPE_ANGLE
         if (Vector2.Angle(Vector2.up, collision.GetContact(0).normal) >= MAX_SLOPE_ANGLE)
             return;
 
-        Debug.Log($"Angle threshold passed");
+        //Debug.Log($"Angle threshold passed");
         anim?.SetTrigger("HitGround");
         SetIsGrounded(true);
     }
