@@ -22,6 +22,9 @@ public class AudioManager : Singleton<AudioManager>
     private AudioClip uiLoadScene;
 
     [SerializeField]
+    private AudioClip roomComplete;
+
+    [SerializeField]
     private List<AudioClip> menuMusicList;
     [SerializeField]
     private List<AudioClip> gameMusicList;
@@ -30,7 +33,19 @@ public class AudioManager : Singleton<AudioManager>
     private AudioSource uiSource;
     [SerializeField]
     private AudioSource musicSource;
+    [SerializeField]
+    private AudioSource gameSource;
     private bool isInGame = false;
+
+    private void OnEnable()
+    {
+        RoomEdge.OnRoomComplete += RoomComplete;
+    }
+
+    private void OnDisable()
+    {
+        RoomEdge.OnRoomComplete -= RoomComplete;
+    }
 
     public void InitSingleton()
     {
@@ -57,6 +72,8 @@ public class AudioManager : Singleton<AudioManager>
         else
             PlayClip(menuMusicList[Random.Range(0, menuMusicList.Count)], musicSource);
     }
+
+    public void RoomComplete(Room.RoomType ignored) { PlayClip(roomComplete, gameSource); }
 
     public void UISubmit() { PlayClip(uiHighlight, uiSource); }
     public void UIHighlight() { PlayClip(uiSubmit, uiSource); }
