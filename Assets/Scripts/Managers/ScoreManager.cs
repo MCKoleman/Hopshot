@@ -9,10 +9,24 @@ public class ScoreManager : Singleton<ScoreManager>
     private ScoreList scoreList;
 
     // Variables
+    [SerializeField]
     private int m_curScore = 0;
+    [SerializeField]
     private int m_highscore = 0;
     public int CurScore { get { return m_curScore; } private set { m_curScore = value; OnScoreUpdate?.Invoke(m_curScore); } }
-    public int Highscore { get { return m_highscore; } private set { m_highscore = value; OnHighscoreUpdate?.Invoke(m_curScore); } }
+    public int Highscore 
+    { 
+        get
+        {
+            return m_highscore;
+        } 
+        private set 
+        {
+            if(value > m_highscore)
+                m_highscore = value;
+            OnHighscoreUpdate?.Invoke(m_highscore);
+        } 
+    }
 
     #region Events
     public delegate void ScoreUpdate(int score);
@@ -23,11 +37,13 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private void OnEnable()
     {
+        LootLockerManager.OnLoadHighscore += HandleLoadHighscore;
         RoomEdge.OnRoomComplete += HandleRoomComplete;
     }
 
     private void OnDisable()
     {
+        LootLockerManager.OnLoadHighscore -= HandleLoadHighscore;
         RoomEdge.OnRoomComplete -= HandleRoomComplete;
     }
     #endregion
@@ -41,28 +57,13 @@ public class ScoreManager : Singleton<ScoreManager>
     public void InitHighscore()
     {
         CurScore = 0;
-        Highscore = LootLockerManager.Instance.GetUserHighscore();
+        LootLockerManager.Instance.GetUserHighscore();
     }
 
     public void SubmitScore()
     {
         LootLockerManager.Instance.SubmitScore(CurScore);
-        CurScore = 0;
-
-        /*
-#if UNITY_EDITOR
-        LootLockerManager.Instance.DEBUG_SubmitScore(5, "1234560", "Debug1");
-        LootLockerManager.Instance.DEBUG_SubmitScore(5, "1234561", "Debug2");
-        LootLockerManager.Instance.DEBUG_SubmitScore(10, "1234562", "Debug3");
-        LootLockerManager.Instance.DEBUG_SubmitScore(15, "1234563", "Debug4");
-        LootLockerManager.Instance.DEBUG_SubmitScore(20, "1234564", "Debug5");
-        LootLockerManager.Instance.DEBUG_SubmitScore(25, "1234565", "Debug6");
-        LootLockerManager.Instance.DEBUG_SubmitScore(30, "1234566", "Debug7");
-        LootLockerManager.Instance.DEBUG_SubmitScore(35, "1234567", "Debug8");
-        LootLockerManager.Instance.DEBUG_SubmitScore(40, "1234568", "Debug9");
-        LootLockerManager.Instance.DEBUG_SubmitScore(45, "1234569", "Debug10");
-        LootLockerManager.Instance.DEBUG_SubmitScore(50, "1234570", "Debug11");
-#endif*/
+        LootLockerManager.Instance.GetUserHighscore();
     }
 
     // Handles completing a room
@@ -81,11 +82,25 @@ public class ScoreManager : Singleton<ScoreManager>
         }
     }
 
+    // Handles loading the highscore from database
+    private void HandleLoadHighscore(int _highscore)
+    {
+        // Only update highscore if it is higher than the current one
+        if(_highscore > Highscore)
+        {
+            Debug.Log($"[ScoreManager] Loaded highscore from database! Old: [{Highscore}], new [{_highscore}]");
+            Highscore = _highscore;
+        }
+    }
+
     // Adds the given score to the current score
     public void AddScore(int score)
     {
         CurScore += score;
         if (CurScore > Highscore)
+        {
+            Debug.Log($"[ScoreManager] Reached new highscore! Old: [{Highscore}], new [{CurScore}]");
             Highscore = CurScore;
+        }
     }
 }

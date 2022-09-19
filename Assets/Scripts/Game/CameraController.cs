@@ -26,8 +26,13 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!shouldFollow)
+        if (!shouldFollow || !GameManager.Instance.IsGameActive)
             return;
+
+#if UNITY_EDITOR
+        if (GameManager.Instance.DEBUG_DISABLE_GENERATION)
+            return;
+#endif
 
         latestX = Mathf.Lerp(this.transform.position.x, Mathf.Max(GetTargetX(), latestX + GetMoveDisplacement()), followSpeed * Time.fixedDeltaTime);
         this.transform.position = new Vector3(latestX, initialY, this.transform.position.z);
@@ -56,6 +61,6 @@ public class CameraController : MonoBehaviour
     // Moves the camera slowly to the right
     private float GetMoveDisplacement()
     {
-        return moveSpeed * Time.deltaTime * SpawnManager.Instance.GetCameraMoveMod();
+        return moveSpeed * Time.fixedDeltaTime * SpawnManager.Instance.GetCameraMoveMod();
     }
 }

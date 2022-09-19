@@ -35,6 +35,25 @@ public class LeaderboardResults
             results.Add(new LeaderboardStruct(-1, "", -1));
     }
 
+    // Trims the results list until it has elementCount elements. If removeFromStart is enabled, it removes from the start instead of end
+    public void Trim(int count, bool removeFromStart)
+    {
+        // Don't trim unless it's needed
+        if (count >= results.Count)
+            return;
+
+        // If removing from the end
+        if(!removeFromStart)
+        {
+            results.RemoveRange(count, results.Count - count);
+            return;
+        }
+
+        // Remove results from the beginning until the correct amount is stored
+        while (results.Count > count)
+            results.RemoveAt(0);
+    }
+
     // Gets leaderboard results from the given LootLocker results
     public void GetLeaderboardResultsFromLootLockerResults(ref LootLockerLeaderboardMember[] values)
     {

@@ -12,14 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7d8f27f7ea19241b997c77b53071fb, type: 3}
   m_Name: RoomList
   m_EditorClassIdentifier: 
+  startRoom: {fileID: 7154138991876976288, guid: 4950153e639cbf44a986209337003633, type: 3}
   easyRooms:
     list:
     - weight: 5
       prefab: {fileID: 573581577894941354, guid: 8d3d57e25cf3f3345b22e38b572ac48f, type: 3}
     - weight: 3
       prefab: {fileID: 573581577894941354, guid: 5060510aa603a8f479f0851385ee464b, type: 3}
-    - weight: 1
+    - weight: 2
       prefab: {fileID: 573581577894941354, guid: 4ed9e71968426b84486f688346d5f1f5, type: 3}
+    - weight: 3
+      prefab: {fileID: 4788160850687371363, guid: fa3f5a1257f327049803a2497630562e, type: 3}
+    - weight: 4
+      prefab: {fileID: 6033192692926165600, guid: 136324b621940c640b64f145723d6cd1, type: 3}
+    - weight: 2
+      prefab: {fileID: 6427048006701063821, guid: 8a7db7a924eecf14e87e89d446539d14, type: 3}
+    - weight: 1
+      prefab: {fileID: 2663355517899294417, guid: ee1656762cb97754682894f96350eef2, type: 3}
   hardRooms:
     list:
     - weight: 2

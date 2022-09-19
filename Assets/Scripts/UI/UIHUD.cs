@@ -12,6 +12,8 @@ public class UIHUD : UIComponent
     [SerializeField]
     private TextMeshProUGUI curScoreText;
     [SerializeField]
+    private UIBoopCooldown boopCooldown;
+    [SerializeField]
     private float tweenDuration = 0.4f;
 
     private void OnEnable()
@@ -25,6 +27,17 @@ public class UIHUD : UIComponent
         ScoreManager.OnScoreUpdate -= UpdateScore;
         ScoreManager.OnHighscoreUpdate -= UpdateHighscore;
     }
+
+    // Updates the displayed scores whenever the HUD is enabled
+    public override void Enable()
+    {
+        base.Enable();
+        UpdateScore(ScoreManager.Instance.CurScore);
+        UpdateHighscore(ScoreManager.Instance.Highscore);
+    }
+
+    // Updates the boop cooldown display
+    public void UpdateBoopCooldown(float percent) { boopCooldown.SetSliderFill(percent); }
 
     // Updates the score displayed on screen
     public void UpdateScore(int score)

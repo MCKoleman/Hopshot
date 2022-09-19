@@ -10,7 +10,17 @@ public class SceneDetector : MonoBehaviour
     [SerializeField]
     private SceneType sceneType;
 
-    private void Start()
+    private void OnEnable()
+    {
+        GameManager.OnSceneLoad += SignalSceneType;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnSceneLoad -= SignalSceneType;
+    }
+
+    private void SignalSceneType()
     {
         OnSceneStart?.Invoke(sceneType);
     }

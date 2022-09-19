@@ -10,6 +10,8 @@ public class PlayRandomAudioOnStart : MonoBehaviour
     
     void Start()
     {
+        if (clips.Length == 0)
+            return;
         audioSource = this.GetComponent<AudioSource>();
         audioSource.clip = clips[Random.Range(0, clips.Length)];
         audioSource.Play();
