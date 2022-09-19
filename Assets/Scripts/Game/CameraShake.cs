@@ -7,7 +7,9 @@ public class CameraShake : MonoBehaviour
     [SerializeField]
     private float shakeDuration = 0.0f;
     [SerializeField]
-    private float baseShakeMagnitude = 0.7f;
+    private float baseShakeDuration = 0.1f;
+    [SerializeField]
+    private float baseShakeMagnitude = 0.3f;
     [SerializeField]
     private float baseDampingSpeed = 1.0f;
 
@@ -21,6 +23,13 @@ public class CameraShake : MonoBehaviour
         initialPosition = transform.localPosition;
         dampingSpeed = baseDampingSpeed;
         shakeMagnitude = baseShakeMagnitude;
+
+        RoomEdge.OnRoomComplete += TriggerShake;
+    }
+
+    private void OnDisable()
+    {
+        RoomEdge.OnRoomComplete -= TriggerShake;
     }
 
     // Update is called once per frame
@@ -43,6 +52,9 @@ public class CameraShake : MonoBehaviour
             }
         }
     }
+
+    // Starts camera shake
+    public void TriggerShake(Room.RoomType ignore) { TriggerShake(baseShakeDuration); }
 
     // Starts camera shake
     public void TriggerShake(float duration)
