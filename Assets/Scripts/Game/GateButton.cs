@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gate_Button : MonoBehaviour
+public class GateButton : MonoBehaviour
 {
     public delegate void ButtonPress();
     public event ButtonPress OnButtonPress;

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gate_Logic : MonoBehaviour
+public class GateLogic : MonoBehaviour
 {
     [SerializeField]
-    private Gate_Button button;
+    private GateButton button;
 
     [SerializeField]
     private Sprite[] pics;
@@ -21,12 +21,16 @@ public class Gate_Logic : MonoBehaviour
 
     private void OnEnable()
     {
+        if (button == null)
+            return;
         button.OnButtonPress += Open;
         button.OnButtonUnpress += Close;
     }
 
     private void OnDisable()
     {
+        if (button == null)
+            return;
         button.OnButtonPress -= Open;
         button.OnButtonUnpress -= Close;
     }

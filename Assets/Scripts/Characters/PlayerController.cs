@@ -32,8 +32,10 @@ public class PlayerController : MonoBehaviour
     private float moveDelta;
     [SerializeField]
     private bool isGrounded = true;
+    private bool isFacingForward = true;
 
     // Constants
+    private const float MOUSE_AIM_ERROR_ZONE = 0.5f;
     private const float MIN_LOOK_THRESHOLD = 0.1f;
     private const float JUMP_THRESHOLD = 0.3f;
     private const float MAX_SLOPE_ANGLE = 45.0f;
@@ -141,6 +143,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Handles looking using a joystick
+    public void HandleLookDelta(Vector2 delta)
+    {
+        // Only change facing direction if the delta is greater than the minimum threshold
+        if(Mathf.Abs(delta.x) > MIN_LOOK_THRESHOLD)
+        {
+            isFacingForward = (delta.x * this.transform.localScale.x) >= 0.0f;
+            SetFacingDir();
+        }
+    }
+
+    // Handles looking using a pointer position (mouse/touch)
+    public void HandleLookPos(Vector2 pos)
+    {
+        Vector3 lookPos = Camera.main.ScreenToWorldPoint(pos);
+        if(Mathf.Abs(lookPos.x - this.transform.position.x) > MOUSE_AIM_ERROR_ZONE)
+        {
+            isFacingForward = (lookPos.x - this.transform.position.x) * this.transform.localScale.x >= 0.0f;
+            SetFacingDir();
+        }
+    }
+
     //
     private void HandlePause()
     {
@@ -187,12 +211,16 @@ public class PlayerController : MonoBehaviour
     // Sets the player's facing direction
     private void SetFacingDir()
     {
-        // TODO: Flip sprite when facing backwards
-        // TOOD: Set anim state when aiming backwards
-        anim?.SetBool("facingForward", true);
-        if(Mathf.Abs(rb.velocity.x) > MIN_LOOK_THRESHOLD)
-            this.transform.localScale = new Vector3(rb.velocity.x > 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
-        //anim?.SetBool("facingForward", rb.velocity.x >= 0.0f);
+        // Swap looking direction
+        bool isMovingForward = rb.velocity.x > 0.0f;
+        if (Mathf.Abs(rb.velocity.x) > MIN_LOOK_THRESHOLD)
+        {
+            // If swapping moving direction, swap facing direction too
+            if ((isMovingForward && this.transform.localScale.x < 0.0f) || (!isMovingForward && this.transform.localScale.x > 0.0f))
+                isFacingForward = !isFacingForward;
+            this.transform.localScale = new Vector3(isMovingForward ? 1.0f : -1.0f, 1.0f, 1.0f);
+        }
+        anim?.SetBool("facingForward", isFacingForward);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -210,6 +238,8 @@ public class PlayerController : MonoBehaviour
         anim?.SetTrigger("HitGround");
         SetIsGrounded(true);
     }
+
+
 
     #region Helper Functions
     private bool CanTakeInput()
@@ -238,11 +268,25 @@ public class PlayerController : MonoBehaviour
     public Vector2 GetPos() { return this.transform.position; }
     #endregion
 
+
+
     #region Input Context Handlers
     public void HandleMoveContext(InputAction.CallbackContext context)
     {
         if (CanTakeInput() || context.ReadValue<Vector2>() == Vector2.zero)
             HandleMove(context.ReadValue<Vector2>());
+    }
+
+    public void HandleLookPosContext(InputAction.CallbackContext context)
+    {
+        if (CanTakeInput())
+            HandleLookPos(context.ReadValue<Vector2>());
+    }
+
+    public void HandleLookDeltaContext(InputAction.CallbackContext context)
+    {
+        if (CanTakeInput())
+            HandleLookDelta(context.ReadValue<Vector2>());
     }
 
     public void HandleJumpContext(InputAction.CallbackContext context)
