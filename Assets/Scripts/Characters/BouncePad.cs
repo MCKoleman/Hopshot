@@ -5,29 +5,21 @@ using UnityEngine;
 public class BouncePad : MonoBehaviour
 {
     [SerializeField]
-    private float bounce;
+    private float bounceForce;
+    [SerializeField]
+    private float maxBounceForce = 20.0f;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Enemy") || collision.collider.CompareTag("Player") || collision.collider.CompareTag("Friend"))
-        {
-            Character tempChar = collision.collider.GetComponent<Character>();
-            if (tempChar != null)
-                {
-                Rigidbody2D tempRB = tempChar.GetComponent<Rigidbody2D>();
-                if (tempRB != null)
-                {
-                    Vector2 tempVector = tempRB.velocity;
-                    float flipY = bounce * tempVector.y;
-                    if (flipY < 0)
-                        flipY *= -1;
+        if (!collision.CompareTag("Enemy") && !collision.CompareTag("Player") && !collision.CompareTag("Friend"))
+            return;
 
-                    tempVector.y = flipY;
-                    tempRB.velocity = tempVector; 
+        // Find Rigidbody
+        Rigidbody2D tempRB = collision.GetComponent<Rigidbody2D>();
+        if (tempRB == null)
+            return;
 
-                    Debug.Log("Bounce");
-                }
-            }
-        }
+        Debug.Log($"Bouncing [{collision.name}] with force [{Mathf.Abs(bounceForce * tempRB.velocity.y)}]");
+        tempRB.velocity = new Vector2(tempRB.velocity.x, Mathf.Min(Mathf.Abs(bounceForce * tempRB.velocity.y), maxBounceForce));
     }
 }
