@@ -52,6 +52,8 @@ public class UIManager : Singleton<UIManager>
     // Returns to the main menu
     public void ReturnToMainMenu()
     {
+        Time.timeScale = 1.0f;
+        IsPaused = false;
         GameManager.Instance.EndGame();
     }
 

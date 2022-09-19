@@ -39,6 +39,7 @@ public class GameManager : Singleton<GameManager>
         LootLockerManager.Instance.InitSingleton();
         PrefabManager.Instance.InitSingleton();
         UIManager.Instance.InitSingleton();
+        AudioManager.Instance.InitSingleton();
         ScoreManager.Instance.InitSingleton();
         SpawnManager.Instance.InitSingleton();
 
@@ -101,10 +102,12 @@ public class GameManager : Singleton<GameManager>
         {
             case SceneDetector.SceneType.GAME:
                 UIManager.Instance.EnableHUD();
+                AudioManager.Instance.SetIsInGame(true);
                 StartGame();
                 break;
             case SceneDetector.SceneType.MAIN_MENU:
                 UIManager.Instance.EnableMainMenu();
+                AudioManager.Instance.SetIsInGame(false);
                 break;
             default:
                 break;

@@ -47,6 +47,8 @@ public class SceneLoader : MonoBehaviour
 
         // Fades out the screen
         UIManager.Instance.SceneFadeOut();
+        yield return new WaitForSeconds(0.2f);
+        AudioManager.Instance.UILoadScene();
         yield return new WaitUntil(() => isFadeOutComplete);
 
         // Loads scene in background
