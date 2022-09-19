@@ -8,8 +8,6 @@ public class TurretLogic : MonoBehaviour
     [SerializeField]
     private TurretWeapons gun;
     [SerializeField]
-    private TargetLight led;
-    [SerializeField]
     private GameObject bullet;
     [SerializeField]
     private Transform fireStartPoint;
@@ -27,6 +25,10 @@ public class TurretLogic : MonoBehaviour
     private float curFireCooldown = 0.0f;
     private bool isPlayerInRange;
 
+    [SerializeField]
+    private Sprite[] pics;
+
+    private SpriteRenderer spriteRenderer;
     private Character character;
 
     private void OnEnable()
@@ -43,6 +45,7 @@ public class TurretLogic : MonoBehaviour
 
     private void Start()
     {
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
         character = this.GetComponent<Character>();
     }
 
@@ -66,6 +69,7 @@ public class TurretLogic : MonoBehaviour
         // Fires a projectile when cooldown is over, resetting cooldown
         else
         {
+            spriteRenderer.sprite = pics[1];
             FireProjectile();
             curFireCooldown = maxFireCooldown;
         }
@@ -74,7 +78,6 @@ public class TurretLogic : MonoBehaviour
     // Wakes up the turret when the player is in range
     private void Wake()
     {
-        led.SetColor(Color.red);
         isPlayerInRange = true;
         curWarmupTime = maxWarmupTime;
         curFireCooldown = maxFireCooldown;
@@ -83,7 +86,7 @@ public class TurretLogic : MonoBehaviour
     // Puts the turret to sleep when player is out of range
     private void Sleep()
     {
-        led.SetColor(Color.green);
+        spriteRenderer.sprite = pics[0];
         isPlayerInRange = false;
     }
 
