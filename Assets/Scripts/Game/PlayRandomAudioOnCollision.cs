@@ -8,7 +8,7 @@ public class PlayRandomAudioOnCollision : MonoBehaviour
     private AudioClip[] clips;
     private AudioSource audioSource;
 
-    private void Start()
+    private void Awake()
     {
         audioSource = this.GetComponent<AudioSource>();
     }

@@ -12,11 +12,13 @@ public class GateLogic : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
+    private AudioSource source;
 
     void Start()
     {
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         rb = this.GetComponent<Rigidbody2D>();
+        source = this.GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -39,6 +41,8 @@ public class GateLogic : MonoBehaviour
     {
         rb.simulated = false;
         spriteRenderer.sprite = pics[1];
+        if(!source.isPlaying)
+            source.Play();
     }
 
     private void Close() 

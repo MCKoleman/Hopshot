@@ -8,6 +8,15 @@ public class BouncePad : MonoBehaviour
     private float bounceForce;
     [SerializeField]
     private float maxBounceForce = 20.0f;
+    [SerializeField]
+    private List<AudioClip> bounceClips = new List<AudioClip>();
+
+    private AudioSource source;
+
+    private void Start()
+    {
+        source = this.GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,6 +29,9 @@ public class BouncePad : MonoBehaviour
             return;
 
         //Debug.Log($"Bouncing [{collision.name}] with force [{Mathf.Abs(bounceForce * tempRB.velocity.y)}]");
+        if(bounceClips.Count > 0)
+            source.clip = bounceClips[Random.Range(0, bounceClips.Count)];
+        source.Play();
         tempRB.velocity = new Vector2(tempRB.velocity.x, Mathf.Min(Mathf.Abs(bounceForce * tempRB.velocity.y), maxBounceForce));
     }
 }
