@@ -328,17 +328,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7154138991876976289}
     m_Modifications:
+    - target: {fileID: 1664746498548004296, guid: 63e8a1bb294df5c43a75fa606733b549, type: 3}
+      propertyPath: bounceForce
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664746498548004296, guid: 63e8a1bb294df5c43a75fa606733b549, type: 3}
+      propertyPath: maxBounceForce
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7599422198254403581, guid: 63e8a1bb294df5c43a75fa606733b549, type: 3}
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7599422198254403581, guid: 63e8a1bb294df5c43a75fa606733b549, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.373758
+      value: 8.4
       objectReference: {fileID: 0}
     - target: {fileID: 7599422198254403581, guid: 63e8a1bb294df5c43a75fa606733b549, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.223431
+      value: -3.25
       objectReference: {fileID: 0}
     - target: {fileID: 7599422198254403581, guid: 63e8a1bb294df5c43a75fa606733b549, type: 3}
       propertyPath: m_LocalPosition.z

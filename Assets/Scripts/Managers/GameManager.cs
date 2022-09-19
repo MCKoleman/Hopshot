@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -40,6 +41,11 @@ public class GameManager : Singleton<GameManager>
         UIManager.Instance.InitSingleton();
         ScoreManager.Instance.InitSingleton();
         SpawnManager.Instance.InitSingleton();
+
+#if UNITY_EDITOR
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+            HandleSceneLoad();
+#endif
     }
 
     // Starts the game, generating the level

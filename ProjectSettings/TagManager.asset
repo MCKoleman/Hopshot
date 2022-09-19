@@ -58,6 +58,9 @@ TagManager:
   - name: Obstacles
     uniqueID: 2097871443
     locked: 0
+  - name: GlowingHazard
+    uniqueID: 4145279121
+    locked: 0
   - name: VFX
     uniqueID: 1436062205
     locked: 0
