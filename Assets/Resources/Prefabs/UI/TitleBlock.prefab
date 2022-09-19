@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'LEAD PROGRAMMER:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 67ec3e49aefb628439b3d8b845a4756a, type: 2}
-  m_sharedMaterial: {fileID: 7653761529941281448, guid: 67ec3e49aefb628439b3d8b845a4756a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5dc1077194f92774aa770c08f554ea8c, type: 2}
+  m_sharedMaterial: {fileID: 1528133429416797372, guid: 5dc1077194f92774aa770c08f554ea8c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -201,8 +201,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: KRISTIAN KOLEHMAINEN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 67ec3e49aefb628439b3d8b845a4756a, type: 2}
-  m_sharedMaterial: {fileID: 7653761529941281448, guid: 67ec3e49aefb628439b3d8b845a4756a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5dc1077194f92774aa770c08f554ea8c, type: 2}
+  m_sharedMaterial: {fileID: 1528133429416797372, guid: 5dc1077194f92774aa770c08f554ea8c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
