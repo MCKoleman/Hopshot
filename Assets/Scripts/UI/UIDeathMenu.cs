@@ -49,6 +49,7 @@ public class UIDeathMenu : UIComponent
     {
         // Enable first score object
         scoreText.gameObject.SetActive(true);
+        AudioManager.Instance.UILoopScore();
 
         // Lerp score to final score
         float curLerpTime = 0.0f;
@@ -79,12 +80,14 @@ public class UIDeathMenu : UIComponent
         {
             newHighscoreText.text = "";
             newHighscoreHolder.SetActive(true);
+            AudioManager.Instance.UINewHighscore();
             StartCoroutine(CycleNewHighscoreText());
         }
         else
         {
             highscoreText.text = highscore.ToString("D9");
             oldHighscoreHolder.SetActive(true);
+            AudioManager.Instance.UIHighscore();
             highscoreText.transform.DOScale(1.2f, scoreBounceTime)
                 .OnComplete(() => highscoreText.transform.DOScale(1.0f, scoreBounceTime));
         }

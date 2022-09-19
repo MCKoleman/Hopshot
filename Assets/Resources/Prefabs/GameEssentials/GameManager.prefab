@@ -510,4 +510,7 @@ MonoBehaviour:
   uiHighlight: {fileID: 8300000, guid: c4e08ace8a473e84d943fc1ec09b9d24, type: 3}
   uiPauseOpen: {fileID: 8300000, guid: f75f02581b9d475459a01242eccee66f, type: 3}
   uiPauseClose: {fileID: 8300000, guid: 2738c84fa2f941541bf48d5f96077082, type: 3}
+  uiScoreIncrease: {fileID: 8300000, guid: 94b188c6e5418914f9f8d3445cb8664a, type: 3}
+  uiHighscore: {fileID: 8300000, guid: ff3f9427181165042854beffd813af36, type: 3}
+  uiNewHighscore: {fileID: 8300000, guid: a7e08662ad652d043a2cbe5441857b79, type: 3}
   uiSource: {fileID: 4070851699788795720}

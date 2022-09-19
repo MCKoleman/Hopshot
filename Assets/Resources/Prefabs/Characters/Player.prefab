@@ -574,6 +574,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: eb1712c54dc908749b03463606533d8d, type: 3}
   - {fileID: 8300000, guid: 68a73e6e72830f4459ae0e660bdbfc9d, type: 3}
   footstepVolume: 0.8
+  groundSounds:
+  - {fileID: 8300000, guid: 2f6aee89a1877614eb1650821893101c, type: 3}
+  - {fileID: 8300000, guid: 05778bf583683bf49808cea1a0c9e13f, type: 3}
+  groundVolume: 1
 --- !u!82 &3822979955440277158
 AudioSource:
   m_ObjectHideFlags: 0

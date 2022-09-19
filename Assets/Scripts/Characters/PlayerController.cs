@@ -211,6 +211,7 @@ public class PlayerController : MonoBehaviour
         anim?.SetBool("IsGrounded", isGrounded);
         if(isGrounded)
         {
+            audioController.Land();
             SetIsHeavy(false);
             curCoyoteTime = maxCoyoteTime;
             if (curBounceTime > 0.0f)
