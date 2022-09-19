@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         {
             curBoopCooldown = Mathf.Max(curBoopCooldown - Time.fixedDeltaTime, 0.0f);
             
-            if(curBoopCooldown < maxBoopCooldown - 1.0f)
+            if(curBoopCooldown < maxBoopCooldown - maxBoopCooldown/8)
             boopGun.Reload();
         }
         if (curBounceTime > 0.0f)
