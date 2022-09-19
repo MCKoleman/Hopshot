@@ -41,7 +41,7 @@ public class BoopGun : MonoBehaviour
     }
 
     public void Reload()
-        {
+    {
         spriteRenderer.sprite = pics[0];
-        }
+    }
 }

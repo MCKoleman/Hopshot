@@ -84,9 +84,15 @@ public class PlayerController : MonoBehaviour
         if (curBoopCooldown > 0.0f)
         {
             curBoopCooldown = Mathf.Max(curBoopCooldown - Time.fixedDeltaTime, 0.0f);
-            
-            if(curBoopCooldown < maxBoopCooldown - maxBoopCooldown/16)
-            boopGun.Reload();
+            UIManager.Instance.UpdateBoopCooldown(curBoopCooldown / maxBoopCooldown);
+
+            // If the cooldown is almost zero, treat it as zero
+            if(Mathf.Approximately(curBoopCooldown, 0.0f))
+            {
+                curBoopCooldown = 0.0f;
+                boopGun.Reload();
+                UIManager.Instance.UpdateBoopCooldown(0.0f);
+            }
         }
         if (curBounceTime > 0.0f)
             curBounceTime = Mathf.Max(curBounceTime - Time.fixedDeltaTime, 0.0f);
@@ -139,6 +145,7 @@ public class PlayerController : MonoBehaviour
             Vector2 tempDirection = -1.0f * boopGun.FireProjectile();
             rb.AddForce(boopRecoil * tempDirection);
             curBoopCooldown = maxBoopCooldown;
+            UIManager.Instance.UpdateBoopCooldown(1.0f);
         }
     }
 

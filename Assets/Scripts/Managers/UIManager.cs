@@ -56,6 +56,9 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.EndGame();
     }
 
+    // Updates the boop cooldown UI
+    public void UpdateBoopCooldown(float percent) { hud.UpdateBoopCooldown(percent); }
+
     #region Transitions
     // Starts the scene fade out transition
     public void SceneFadeOut()
