@@ -58,14 +58,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.33962262, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a50486ba5a7e1934e850f1e41f40f046, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5677,7 +5677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3302978773533691661, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
       propertyPath: m_text
-      value: ROBERT
+      value: ROBERT KILKENNY
       objectReference: {fileID: 0}
     - target: {fileID: 3973086637190351378, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6012,7 +6012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3302978773533691661, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
       propertyPath: m_text
-      value: SWORDLOCK
+      value: CHRISTOPHER TRUTA
       objectReference: {fileID: 0}
     - target: {fileID: 3973086637190351378, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6686,7 +6686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3302978773533691661, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
       propertyPath: m_text
-      value: ROBARTZY
+      value: ROBERT PETERSON
       objectReference: {fileID: 0}
     - target: {fileID: 3973086637190351378, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6734,7 +6734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7008068897649573259, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
       propertyPath: m_text
-      value: 'LEAD ARTIST:'
+      value: 'LEVEL ARTIST:'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
@@ -8160,6 +8160,10 @@ PrefabInstance:
     - target: {fileID: 6637274038835762257, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
       propertyPath: m_Name
       value: TitleBlock_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7008068897649573259, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}
+      propertyPath: m_text
+      value: 'SYSTEMS PROGRAMMER:'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed58d8f2c63eaba42986066a09eaec6c, type: 3}

@@ -190,13 +190,15 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Only check ground collisions
-        if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("Friend") && !collision.gameObject.CompareTag("Enemy"))
+        if (!collision.collider.CompareTag("Ground") && !collision.collider.CompareTag("Friend") && !collision.collider.CompareTag("Enemy"))
             return;
 
+        Debug.Log($"Player collided with [{collision.collider.name}]");
         // Only count grounding if colliding on angle smaller than MAX_SLOPE_ANGLE
         if (Vector2.Angle(Vector2.up, collision.GetContact(0).normal) >= MAX_SLOPE_ANGLE)
             return;
 
+        Debug.Log($"Angle threshold passed");
         anim?.SetTrigger("HitGround");
         SetIsGrounded(true);
     }
