@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  respawnTime: 5
+  respawnTime: 0
 --- !u!50 &8646311187271778165
 Rigidbody2D:
   serializedVersion: 4
