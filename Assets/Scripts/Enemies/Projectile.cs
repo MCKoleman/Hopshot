@@ -37,5 +37,9 @@ public class Projectile : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
+        // Destroy projectile on collision with friend cube
+        if (collision.collider.CompareTag("Friend"))
+            Destroy(this.gameObject);
     }
 }
