@@ -309,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 2.5
   shouldFollow: 1
-  moveSpeed: 5
+  moveSpeed: 10
   minScreenPos: 0.5
   latestX: -3.4028235e+38
 --- !u!81 &2887364410702515064

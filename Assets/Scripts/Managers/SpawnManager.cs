@@ -56,6 +56,7 @@ public class SpawnManager : Singleton<SpawnManager>
     public void GenerateFirstRoom()
     {
         Debug.Log($"[SpawnManager] Spawning first room");
+        CurRoomIndex = 0;
 
         prevRoom = null;
         curRoom = HandleRoomSpawn(roomList.GetStartRoom(), firstRoomStartOffset, 0, Room.RoomType.EASY);
@@ -74,7 +75,10 @@ public class SpawnManager : Singleton<SpawnManager>
         // Set new rooms
         prevRoom = curRoom;
         curRoom = nextRoom;
-        nextRoom = SpawnRoom(CurRoomIndex, curRoom.GetNextRoomPos());
+        if (curRoom != null)
+            nextRoom = SpawnRoom(CurRoomIndex, curRoom.GetNextRoomPos());
+        else
+            Debug.LogError("Attempted to complete room when there is none");
     }
 
     // Spawns a room at the given index
