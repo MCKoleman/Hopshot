@@ -29,6 +29,10 @@ MonoBehaviour:
       prefab: {fileID: 6427048006701063821, guid: 8a7db7a924eecf14e87e89d446539d14, type: 3}
     - weight: 1
       prefab: {fileID: 2663355517899294417, guid: ee1656762cb97754682894f96350eef2, type: 3}
+    - weight: 2
+      prefab: {fileID: 8150026528454222734, guid: 5289c3ca59ab30a43842cfee6a595c63, type: 3}
+    - weight: 1
+      prefab: {fileID: 6565471387373820782, guid: 279de514b1743344180ccbee3aaa9d5b, type: 3}
   hardRooms:
     list:
     - weight: 2
