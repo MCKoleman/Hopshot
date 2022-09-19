@@ -79,7 +79,12 @@ public class PlayerController : MonoBehaviour
         if (curCoyoteTime > 0.0f && !isGrounded)
             curCoyoteTime = Mathf.Max(curCoyoteTime - Time.fixedDeltaTime, 0.0f);
         if (curBoopCooldown > 0.0f)
+        {
             curBoopCooldown = Mathf.Max(curBoopCooldown - Time.fixedDeltaTime, 0.0f);
+            
+            if(curBoopCooldown < maxBoopCooldown - 1.0f)
+            boopGun.Reload();
+        }
         if (curBounceTime > 0.0f)
             curBounceTime = Mathf.Max(curBounceTime - Time.fixedDeltaTime, 0.0f);
         if (isGrounded)
@@ -130,6 +135,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 tempDirection = -1.0f * boopGun.FireProjectile();
             rb.AddForce(boopRecoil * tempDirection);
+            curBoopCooldown = maxBoopCooldown;
         }
     }
 
