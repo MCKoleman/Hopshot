@@ -7,22 +7,25 @@ public class LootLockerManager : Singleton<LootLockerManager>
 {
     public delegate void LoadHighscore(int highscore);
     public static event LoadHighscore OnLoadHighscore;
+    public delegate void SignIn(string username);
+    public static event SignIn OnSignIn;
 
     private string memberID = "";
     private string playerName = "";
     private bool isLoggedIn = false;
 
+    private bool isLoggingIn = false;
     private const int leaderboardID = 7136;
 
     public void InitSingleton()
     {
+        isLoggedIn = false;
         InitLootLocker();
     }
 
     // Initializes LootLocker and signs in
     public void InitLootLocker()
     {
-        
         LootLockerSDKManager.StartGuestSession((response) =>
         {
             if (!response.success)
@@ -35,6 +38,7 @@ public class LootLockerManager : Singleton<LootLockerManager>
 
             // Store player ID
             memberID = response.player_id.ToString();
+            isLoggingIn = true;
             GetUserHighscore();
             isLoggedIn = true;
         });
@@ -53,11 +57,8 @@ public class LootLockerManager : Singleton<LootLockerManager>
         if (score <= 0)
             return;
 
-        // Only submit a new score if it is higher than the previous one
-        if (GetUserHighscore() >= score)
-            return;
-        
-        LootLockerSDKManager.SubmitScore(memberID, score, leaderboardID, playerName, (response) =>
+        string tempName = (playerName != "") ? playerName : "ANON BOT";
+        LootLockerSDKManager.SubmitScore(memberID, score, leaderboardID, tempName, (response) =>
         {
             if(response.statusCode == 200)
             {
@@ -89,13 +90,11 @@ public class LootLockerManager : Singleton<LootLockerManager>
 #endif
 
     // Returns the player's highscore if one exists
-    public int GetUserHighscore()
+    public void GetUserHighscore()
     {
-        int trackedScore = 0;
-
         // Don't return a score for a non-existant user
         if (memberID == "")
-            return 0;
+            return;
 
         
         LootLockerSDKManager.GetMemberRank(leaderboardID, memberID, (response) =>
@@ -103,18 +102,23 @@ public class LootLockerManager : Singleton<LootLockerManager>
             if (response.statusCode == 200)
             {
                 Debug.Log($"[LootLocker] Successfully retrieved player {memberID} score");
-                trackedScore = response.score;
                 if (response.score != 0 && playerName != response.metadata)
                     playerName = response.metadata;
 
                 OnLoadHighscore?.Invoke(response.score);
+
+                // When requesting a score while logging in, signal a successful signin
+                if(isLoggingIn)
+                {
+                    OnSignIn?.Invoke(playerName);
+                    isLoggingIn = false;
+                }
             }
             else
             {
                 Debug.Log($"[LootLocker] Failed to retrieve player {memberID} score: {response.Error}");
             }
         });
-        return trackedScore;
     }
 
     // Returns the top LEADERBOARD_DISPLAY_COUNT results from the leaderboard at the given index
@@ -139,11 +143,18 @@ public class LootLockerManager : Singleton<LootLockerManager>
     // Returns the next LEADERBOARD_DISPLAY_COUNT results from the leaderboard after the given index
     public void GetLeaderboardNextScores(LeaderboardResults results, int index)
     {
-        LootLockerSDKManager.GetScoreList(leaderboardID, UILeaderboard.LEADERBOARD_DISPLAY_COUNT, index, (response) =>
+        // Start searching from previous results all the way through current and next results, storing the latest five
+        int startIndex = (index <= 0) ? 0 : (index - UILeaderboard.LEADERBOARD_DISPLAY_COUNT);
+        int searchCount = ((index <= 0) ? 2 : 3) * UILeaderboard.LEADERBOARD_DISPLAY_COUNT;
+
+        LootLockerSDKManager.GetScoreList(leaderboardID, searchCount, startIndex, (response) =>
         {
             LootLockerLeaderboardMember[] values = response.items;
             results.GetLeaderboardResultsFromLootLockerResults(ref values);
+            results.Trim(UILeaderboard.LEADERBOARD_DISPLAY_COUNT, true);
+            UILeaderboard.AsyncUpdateLeaderboardTrigger(Mathf.Max(results.GetLastRank() - UILeaderboard.LEADERBOARD_DISPLAY_COUNT - 1, 0));
 
+            /*
             LootLockerSDKManager.GetNextScoreList(leaderboardID, UILeaderboard.LEADERBOARD_DISPLAY_COUNT, (response) =>
             {
                 if (response.statusCode == 200)
@@ -151,13 +162,12 @@ public class LootLockerManager : Singleton<LootLockerManager>
                     Debug.Log($"[LootLocker] Successfully retrieved top scores after index {index}");
                     LootLockerLeaderboardMember[] values = response.items;
                     results.AppendLeaderboardResultsFromLootLockerResults(ref values);
-                    UILeaderboard.AsyncUpdateLeaderboardTrigger(results.GetLastRank()-1);
                 }
                 else
                 {
                     Debug.Log($"[LootLocker] Failed to retrieve top scores after {index}");
                 }
-            });
+            });*/
         });
     }
 
@@ -170,9 +180,9 @@ public class LootLockerManager : Singleton<LootLockerManager>
             {
                 Debug.Log($"[LootLocker] Successfully retrieved scores around player {memberID}");
 
-                int rank = response.rank;
+                int rankIndex = response.rank - 1;
                 int halfDisplay = Mathf.FloorToInt(UILeaderboard.LEADERBOARD_DISPLAY_COUNT * 0.5f);
-                int after = rank < halfDisplay + 1 ? 0 : rank - halfDisplay;
+                int after = rankIndex < halfDisplay + 1 ? 0 : rankIndex - halfDisplay;
 
                 GetLeaderboardHighscores(results, after);
             }
