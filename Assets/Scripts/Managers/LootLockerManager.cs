@@ -15,7 +15,7 @@ public class LootLockerManager : Singleton<LootLockerManager>
     private bool isLoggedIn = false;
 
     private bool isLoggingIn = false;
-    private const int leaderboardID = 7136;
+    private const string leaderboardID = "highscore";
 
     public void InitSingleton()
     {

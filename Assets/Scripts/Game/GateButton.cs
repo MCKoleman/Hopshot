@@ -17,15 +17,15 @@ public class GateButton : MonoBehaviour
     private Sprite[] pics;
 
     private SpriteRenderer spriteRenderer;
+    private AudioSource source;
 
     // Start is called before the first frame update
     void Start()
     {
         active = true;
         spriteRenderer = this.GetComponent<SpriteRenderer>();
-
+        source = this.GetComponent<AudioSource>();
     }
-
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -35,6 +35,10 @@ public class GateButton : MonoBehaviour
         if (!collider.CompareTag("Player") && !collider.CompareTag("Friend"))
             return;
         OnButtonPress?.Invoke();
+
+        // Play press sound
+        if(!source.isPlaying)
+            source.Play();
         touching++;
         spriteRenderer.sprite = pics[1];
 
