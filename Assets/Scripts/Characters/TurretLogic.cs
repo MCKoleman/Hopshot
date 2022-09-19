@@ -94,7 +94,9 @@ public class TurretLogic : MonoBehaviour
     private void FireProjectile()
     {
         Vector2 direction = (fireTowards.transform.position - fireStartPoint.transform.position);
-        Projectile tempProj = Instantiate(bullet, fireStartPoint.position, Quaternion.identity, PrefabManager.Instance.projectileHolder).GetComponent<Projectile>();
+        GameObject spawned = Instantiate(bullet, fireStartPoint.position, Quaternion.identity, PrefabManager.Instance.projectileHolder);
+        spawned.transform.localScale = new Vector3(spawned.transform.localScale.x * ((direction.x > 0.0f) ? -1.0f : 1.0f), spawned.transform.localScale.y, 1.0f);
+        Projectile tempProj = spawned.GetComponent<Projectile>();
         if (tempProj != null)
             tempProj.InitProjectile(bulletSpeed * direction, character, true);
     }

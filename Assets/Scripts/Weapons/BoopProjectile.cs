@@ -51,6 +51,6 @@ public class BoopProjectile : MonoBehaviour
 
         // Boops the rigidbody away from the projectile with inverse square force
         Vector2 distance = tempRB.position - rb.position;
-        tempRB.velocity = totalBoopForce / Mathf.Pow(distance.magnitude, 2.0f) * distance.normalized;
+        tempRB.velocity += totalBoopForce / Mathf.Pow(distance.magnitude, 2.0f) * distance.normalized;
     }
 }
