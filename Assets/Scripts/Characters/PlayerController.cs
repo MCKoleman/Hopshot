@@ -48,13 +48,26 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private PlayerCharacter character;
     private BoopGun boopGun;
+    private PlayerAudioController audioController;
+
+    private void OnEnable()
+    {
+        if(character == null)
+            character = this.GetComponent<PlayerCharacter>();
+        character.OnDeath += HandleDeath;
+    }
+
+    private void OnDisable()
+    {
+        character.OnDeath -= HandleDeath;
+    }
 
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
-        character = this.GetComponent<PlayerCharacter>();
         boopGun = this.GetComponentInChildren<BoopGun>();
+        audioController = this.GetComponentInChildren<PlayerAudioController>();
         touchingGroundObjs = new List<GameObject>();
     }
 
@@ -129,6 +142,7 @@ public class PlayerController : MonoBehaviour
 
         // TODO: Play jump sound
         anim?.SetTrigger("Jump");
+        audioController.Jump();
 
         SetIsHeavy(false);
         rb.velocity = new Vector2(rb.velocity.x, speedMods.JUMP_FORCE);
@@ -169,6 +183,18 @@ public class PlayerController : MonoBehaviour
             isFacingForward = (lookPos.x - this.transform.position.x) * this.transform.localScale.x >= 0.0f;
             SetFacingDir();
         }
+    }
+
+    // Plays a footstep sound
+    public void HandleFootstep()
+    {
+        audioController.Footstep();
+    }
+
+    // Handles the player death
+    private void HandleDeath()
+    {
+        audioController.Die();
     }
 
     //

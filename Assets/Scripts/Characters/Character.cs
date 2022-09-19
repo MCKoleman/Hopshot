@@ -62,10 +62,16 @@ public class Character : MonoBehaviour
         OnDeath?.Invoke();
         if(!DoesRespawn)
         {
-            Destroy(this.gameObject);
+            DestroySelf();
         }
         else
             respawnCoroutine = StartCoroutine(HandleRespawnTimer());
+    }
+
+    // Destroys this gameobject
+    protected virtual void DestroySelf()
+    {
+        Destroy(this.gameObject);
     }
 
     // Enables the character and its components

@@ -52,7 +52,6 @@ public class UIManager : Singleton<UIManager>
     // Returns to the main menu
     public void ReturnToMainMenu()
     {
-        PrefabManager.Instance.ClearContent();
         GameManager.Instance.EndGame();
     }
 
@@ -88,6 +87,7 @@ public class UIManager : Singleton<UIManager>
     {
         pauseMenu.Enable();
         Time.timeScale = 0.0f;
+        AudioManager.Instance.UIPauseOpen();
         IsPaused = true;
     }
 
@@ -96,6 +96,7 @@ public class UIManager : Singleton<UIManager>
     {
         pauseMenu.Disable();
         Time.timeScale = 1.0f;
+        AudioManager.Instance.UIPauseClose();
         IsPaused = false;
     }
     #endregion

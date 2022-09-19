@@ -28,9 +28,11 @@ public class UIBoopCooldown : MonoBehaviour
     private Color cooldownTargetColor;
     private Color sliderTargetColor;
     private float targetSliderFill;
+    private AudioSource source;
 
     private void Start()
     {
+        source = this.GetComponent<AudioSource>();
         targetSliderFill = 1.0f;
         cooldownTargetColor = cooldownEnabledColor;
         sliderTargetColor = sliderEnabledColor;
@@ -48,8 +50,11 @@ public class UIBoopCooldown : MonoBehaviour
                 // Bounce on reaching enabled color
                 cooldownIcon.color = cooldownTargetColor;
                 if (MathUtils.IsAlmostColor(cooldownEnabledColor, cooldownTargetColor, 2))
+                {
+                    source.Play();
                     cooldownIcon.transform.DOScale(1.2f, cooldownBounceSpeed)
                         .OnComplete(() => cooldownIcon.transform.DOScale(1.0f, cooldownBounceSpeed));
+                }
             }
         }
         

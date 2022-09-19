@@ -23,10 +23,16 @@ public class UIBtnAnimator : MonoBehaviour
     public void Highlight()
     {
         this.transform.DOScale(highlightScale, scaleSpeed);
+        AudioManager.Instance.UIHighlight();
     }
 
     public void Byelight()
     {
         this.transform.DOScale(1.0f, scaleSpeed);
+    }
+
+    public void Click()
+    {
+        AudioManager.Instance.UISubmit();
     }
 }
