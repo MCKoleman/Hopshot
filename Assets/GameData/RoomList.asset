@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7d8f27f7ea19241b997c77b53071fb, type: 3}
   m_Name: RoomList
   m_EditorClassIdentifier: 
+  startRoom: {fileID: 7154138991876976288, guid: 4950153e639cbf44a986209337003633, type: 3}
   easyRooms:
     list:
     - weight: 5

@@ -50,11 +50,8 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitUntil(() => isFadeOutComplete);
 
         // Loads scene in background
-        if (level == 0)
-            UIManager.Instance.EnableMainMenu();
-        else
-            UIManager.Instance.EnableHUD();
         AsyncOperation loading = SceneManager.LoadSceneAsync(level);
+        GameManager.Instance.HandleSceneStartLoad(level);
         yield return new WaitUntil(() => loading.isDone);
 
         // Fades in the screen

@@ -26,6 +26,14 @@ public class UIHUD : UIComponent
         ScoreManager.OnHighscoreUpdate -= UpdateHighscore;
     }
 
+    // Updates the displayed scores whenever the HUD is enabled
+    public override void Enable()
+    {
+        base.Enable();
+        UpdateScore(ScoreManager.Instance.CurScore);
+        UpdateHighscore(ScoreManager.Instance.Highscore);
+    }
+
     // Updates the score displayed on screen
     public void UpdateScore(int score)
     {

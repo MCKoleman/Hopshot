@@ -16,13 +16,13 @@ public class CameraCollider : MonoBehaviour
     private void Start()
     {
         this.transform.position = new Vector3(Camera.main.ViewportToWorldPoint(Vector3.zero).x, this.transform.position.y, this.transform.position.z);
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     private void Update()
     {
         // Only check for player death if they are still colliding
-        if (!isPlayerColliding || !GameManager.Instance.IsGameActive)
+        if (!isPlayerColliding || !GameManager.Instance.IsGameActive || player == null)
             return;
 
         if (Camera.main.WorldToViewportPoint(player.position).x <= DEATH_THRESHOLD)

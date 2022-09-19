@@ -19,7 +19,7 @@ public class BouncePad : MonoBehaviour
         if (tempRB == null)
             return;
 
-        Debug.Log($"Bouncing [{collision.name}] with force [{Mathf.Abs(bounceForce * tempRB.velocity.y)}]");
+        //Debug.Log($"Bouncing [{collision.name}] with force [{Mathf.Abs(bounceForce * tempRB.velocity.y)}]");
         tempRB.velocity = new Vector2(tempRB.velocity.x, Mathf.Min(Mathf.Abs(bounceForce * tempRB.velocity.y), maxBounceForce));
     }
 }

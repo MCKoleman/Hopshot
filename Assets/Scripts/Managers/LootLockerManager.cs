@@ -5,6 +5,9 @@ using LootLocker.Requests;
 
 public class LootLockerManager : Singleton<LootLockerManager>
 {
+    public delegate void LoadHighscore(int highscore);
+    public static event LoadHighscore OnLoadHighscore;
+
     private string memberID = "";
     private string playerName = "";
     private bool isLoggedIn = false;
@@ -103,6 +106,8 @@ public class LootLockerManager : Singleton<LootLockerManager>
                 trackedScore = response.score;
                 if (response.score != 0 && playerName != response.metadata)
                     playerName = response.metadata;
+
+                OnLoadHighscore?.Invoke(response.score);
             }
             else
             {

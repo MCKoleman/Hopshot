@@ -129,7 +129,7 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   projectileHolder: {fileID: 422100038659497147}
   levelHolder: {fileID: 4573418849462114805}
-  contentHolder: {fileID: 0}
+  contentHolder: {fileID: 4548538040760613724}
 --- !u!1 &4559384254263668761
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4548538040760613724}
   m_Layer: 0
-  m_Name: EnemyHolder
+  m_Name: ContentHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d99343dd1bb1c6438ac7032a98afeb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
 --- !u!1 &7695479558249168184
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,6 +327,7 @@ MonoBehaviour:
   contentList: {fileID: 11400000, guid: 433e6d7ff2ec807439f7ed80cc6bbe25, type: 2}
   diffMods: {fileID: 11400000, guid: 76bdcfc985cacc44e997b0ad533096fc, type: 2}
   hardRoomInterval: 4
+  firstRoomStartOffset: {x: -12.5, y: 0, z: 0}
   prevRoom: {fileID: 0}
   curRoom: {fileID: 0}
   nextRoom: {fileID: 0}

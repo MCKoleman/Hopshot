@@ -7,9 +7,16 @@ using UnityEngine;
 public class RoomList : ScriptableObject
 {
     [SerializeField]
+    private GameObject startRoom;
+    [SerializeField]
     private WeightedGameObjectList easyRooms;
     [SerializeField]
     private WeightedGameObjectList hardRooms;
+
+    public GameObject GetStartRoom()
+    {
+        return startRoom;
+    }
 
     public GameObject GetRandomEasyRoom()
     {

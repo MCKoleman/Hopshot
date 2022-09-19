@@ -17,7 +17,7 @@ public class ContentList : ScriptableObject
 
     public GameObject GetRandomContent(GlobalVars.ContentType content)
     {
-        Debug.Log($"Called GetRandomContent on content type [{content.ToString()}]");
+        //Debug.Log($"Called GetRandomContent on content type [{content.ToString()}]");
         switch(content)
         {
             case GlobalVars.ContentType.ENEMY:

@@ -13,6 +13,8 @@ public class SpawnManager : Singleton<SpawnManager>
     private DifficultyMods diffMods;
     [SerializeField, Range(1, 5)]
     private int hardRoomInterval = 4;
+    [SerializeField]
+    private Vector3 firstRoomStartOffset;
 
     [Header("State Info")]
     [SerializeField]
@@ -53,15 +55,10 @@ public class SpawnManager : Singleton<SpawnManager>
     #region Room Spawning
     public void GenerateFirstRoom()
     {
+        Debug.Log($"[SpawnManager] Spawning first room");
+
         prevRoom = null;
-        if (curRoom == null)
-        {
-            var rooms = GameObject.FindGameObjectsWithTag("Room");
-            if (rooms.Length != 0)
-                curRoom = rooms[0].GetComponent<Room>();
-            else
-                curRoom = SpawnRoom(0, Vector3.zero);
-        }
+        curRoom = HandleRoomSpawn(roomList.GetStartRoom(), firstRoomStartOffset, 0, Room.RoomType.EASY);
         nextRoom = SpawnRoom(1, curRoom.GetNextRoomPos());
     }
 
