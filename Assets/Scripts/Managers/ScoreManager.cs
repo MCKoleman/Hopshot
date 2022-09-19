@@ -57,13 +57,13 @@ public class ScoreManager : Singleton<ScoreManager>
     public void InitHighscore()
     {
         CurScore = 0;
-        Highscore = LootLockerManager.Instance.GetUserHighscore();
+        LootLockerManager.Instance.GetUserHighscore();
     }
 
     public void SubmitScore()
     {
         LootLockerManager.Instance.SubmitScore(CurScore);
-        Highscore = LootLockerManager.Instance.GetUserHighscore();
+        LootLockerManager.Instance.GetUserHighscore();
     }
 
     // Handles completing a room
