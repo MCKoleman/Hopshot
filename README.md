@@ -6,8 +6,8 @@ Git repository for the game Hopshot (available on [itch.io](https://mckoleman.it
 The game was created in Unity with C# and has an integration with the LootLocker API for public scoreboards.
 
 ### Credits
-Systems Programmer - Kristian Kolehmainen
-UI Designer - Kristian Kolehmainen
-Gameplay Programmer - Robert Kilkenny
-Level Artist - Robert Peterson
-Character Artist - Christopher Truta
+Systems Programmer - Kristian Kolehmainen<br/>
+UI Designer - Kristian Kolehmainen<br/>
+Gameplay Programmer - Robert Kilkenny<br/>
+Level Artist - Robert Peterson<br/>
+Character Artist - Christopher Truta<br/>
